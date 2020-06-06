@@ -24,7 +24,7 @@ public class PotteryMesh : MonoBehaviour
     int innerTrianglesNum = 3 * verticesPerFloor * 2 * verticesFloorNum;
     int bottomTrianglesNum = 3 * verticesPerFloor * 2;
 
-    static float x = 0.5f, y = 0.5f;
+    static float x = 0.5f, y = 0.5f, z = 0.5f;
 
     // Start is called before the first frame update
     void Start()
@@ -48,7 +48,7 @@ public class PotteryMesh : MonoBehaviour
             {
                 x = 1f;
             }
-            Debug.Log("x:" + x + ", y:" + y);
+            Debug.Log("x:" + x + ", y:" + y + ", z:" + z + ", r:" + (float)Math.Sqrt(x * x + z * z));
         }
         if (Input.GetKey(KeyCode.A))
         {
@@ -57,7 +57,7 @@ public class PotteryMesh : MonoBehaviour
             {
                 x = 0f;
             }
-            Debug.Log("x:" + x + ", y:" + y);
+            Debug.Log("x:" + x + ", y:" + y + ", z:" + z + ", r:" + (float)Math.Sqrt(x * x + z * z));
         }
         if (Input.GetKey(KeyCode.W))
         {
@@ -66,7 +66,7 @@ public class PotteryMesh : MonoBehaviour
             {
                 y = 1f;
             }
-            Debug.Log("x:" + x + ", y:" + y);
+            Debug.Log("x:" + x + ", y:" + y + ", z:" + z + ", r:" + (float)Math.Sqrt(x * x + z * z));
         }
         if (Input.GetKey(KeyCode.S))
         {
@@ -75,10 +75,28 @@ public class PotteryMesh : MonoBehaviour
             {
                 y = 0f;
             }
-            Debug.Log("x:" + x + ", y:" + y);
+            Debug.Log("x:" + x + ", y:" + y + ", z:" + z + ", r:" + (float)Math.Sqrt(x * x + z * z));
+        }
+        if (Input.GetKey(KeyCode.E))
+        {
+            z = z + 0.01f;
+            if (z < 0f)
+            {
+                z = 0f;
+            }
+            Debug.Log("x:" + x + ", y:" + y + ", z:" + z + ", r:" + (float)Math.Sqrt(x * x + z * z));
+        }
+        if (Input.GetKey(KeyCode.Q))
+        {
+            z = z - 0.01f;
+            if (z < 0f)
+            {
+                z = 0f;
+            }
+            Debug.Log("x:" + x + ", y:" + y + ", z:" + z + ", r:" + (float)Math.Sqrt(x * x + z * z));
         }
 
-        if (radius[(int)(y * 100)] > x) //need to be changed for VR input
+        if (radius[(int)(y * 100)] > (float)Math.Sqrt(x*x+z*z)) //need to be changed for VR input
         {
             SetRadius();
             SetVertices();
@@ -124,21 +142,36 @@ public class PotteryMesh : MonoBehaviour
         //need to be changed for VR input
         //need more exeption check
 
-        for (int i = 0; i <= (int)((defaultRadius - x) * 100); i++)
+        for (int i = 0; i <= (int)((defaultRadius - (float)Math.Sqrt(x * x + z * z)) * 100); i++)
         {
-            if (radius[(int)(y * 100) + i] > x + 0.01f * (float)i)
+            if ((int)(y * 100) + i > verticesFloorNum)
             {
-                radius[(int)(y * 100) + i] = x + 0.01f * (float)i;
+                break;
             }
-        }
-        for (int i = 0; i <= (int)((defaultRadius - x) * 100); i++)
-        {
-            if (radius[(int)(y * 100) - i] > x + 0.01f * (float)i)
-            {
-                radius[(int)(y * 100) - i] = x + 0.01f * (float)i;
-            }
-        }
 
+            if (radius[(int)(y * 100) + i] > (float)Math.Sqrt(x * x + z * z) + 0.01f * (float)i)
+            {
+                if ((float)Math.Sqrt(x * x + z * z) + 0.01f * (float)i > 0.2f)
+                {
+                    radius[(int)(y * 100) + i] = (float)Math.Sqrt(x * x + z * z) + 0.01f * (float)i;
+                }
+            }
+        }
+        for (int i = 0; i <= (int)((defaultRadius - (float)Math.Sqrt(x * x + z * z)) * 100); i++)
+        {
+            if ((int)(y * 100) - i < 0)
+            {
+                break;
+            }
+
+            if (radius[(int)(y * 100) - i] > (float)Math.Sqrt(x * x + z * z) + 0.01f * (float)i)
+            {
+                if ((float)Math.Sqrt(x * x + z * z) + 0.01f * (float)i > 0.2f)
+                {
+                    radius[(int)(y * 100) - i] = (float)Math.Sqrt(x * x + z * z) + 0.01f * (float)i;
+                }
+            }
+        }
     }
 
     void CreateTriangles()
