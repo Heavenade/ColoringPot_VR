@@ -34,7 +34,7 @@ public class StartScene : MonoBehaviour
         Debug.Log("pointer clicked: " + e.target.name);
         if (e.target.name == "StartButton")
         {
-            SceneManager.LoadScene(sceneName: "CraftScene");
+            SceneManager.LoadScene(sceneName: "PotteryMoldingScene");
         } else if (e.target.name == "QuitButton")
         {
             Application.Quit();
