@@ -29,7 +29,7 @@ public class PotteryMesh : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        vertices = new Vector3[innerVerticesNum * 2];
+        vertices = new Vector3[innerVerticesNum * 2 + 2];
         InitializeRadius();
         SetVertices();
         CreateTriangles();
@@ -135,12 +135,14 @@ public class PotteryMesh : MonoBehaviour
                 vertices[i * verticesPerFloor + j + innerVerticesNum] = new Vector3((float)Math.Sin(angle * j * radian) * (radius[i] - 0.2f), (float)i * eachHeight, (float)Math.Cos(angle * j * radian) * (radius[i] - 0.2f));
             }
         }
+
+        vertices[2 * innerVerticesNum] = new Vector3(0f, 0f, 0f);
+        vertices[2 * innerVerticesNum + 1] = new Vector3(0f, eachHeight, 0f);
     }
 
     void SetRadius()
     {
         //need to be changed for VR input
-        //need more exeption check
 
         for (int i = 0; i <= (int)((defaultRadius - (float)Math.Sqrt(x * x + z * z)) * 100); i++)
         {
@@ -225,16 +227,17 @@ public class PotteryMesh : MonoBehaviour
         }
 
 
-        //buttom(need to be change..maybe?)
+        //buttom
         for (int i = 0; i < verticesPerFloor; i++)
         {
-            triangles[6 * i + 2 * innerTrianglesNum + bottomTrianglesNum] = verticesPerFloor * (verticesFloorNum + 2) + (i + 1) % verticesPerFloor;
+            triangles[6 * i + 2 * innerTrianglesNum + bottomTrianglesNum] = 2 * innerVerticesNum;
             triangles[6 * i + 1 + 2 * innerTrianglesNum + bottomTrianglesNum] = (i + 1) % verticesPerFloor;
             triangles[6 * i + 2 + 2 * innerTrianglesNum + bottomTrianglesNum] = i;
 
-            triangles[6 * i + 3 + 2 * innerTrianglesNum + bottomTrianglesNum] = triangles[6 * i + 2 * innerTrianglesNum + bottomTrianglesNum];
-            triangles[6 * i + 4 + 2 * innerTrianglesNum + bottomTrianglesNum] = triangles[6 * i + 2 + 2 * innerTrianglesNum + bottomTrianglesNum];
-            triangles[6 * i + 5 + 2 * innerTrianglesNum + bottomTrianglesNum] = verticesPerFloor * (verticesFloorNum + 2) + i;
+            triangles[6 * i + 3 + 2 * innerTrianglesNum + bottomTrianglesNum] = verticesPerFloor * (verticesFloorNum + 3) + (i + 1) % verticesPerFloor;
+            triangles[6 * i + 4 + 2 * innerTrianglesNum + bottomTrianglesNum] = 2 * innerVerticesNum + 1;
+            triangles[6 * i + 5 + 2 * innerTrianglesNum + bottomTrianglesNum] = verticesPerFloor * (verticesFloorNum + 3) + i;
+
         }
 
     }
@@ -246,5 +249,6 @@ public class PotteryMesh : MonoBehaviour
         mesh.vertices = vertices;
         mesh.triangles = triangles;
         GetComponent<MeshFilter>().mesh = mesh;
+        mesh.RecalculateNormals();
     }
 }
