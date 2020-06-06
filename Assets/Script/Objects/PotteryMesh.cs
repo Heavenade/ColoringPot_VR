@@ -4,9 +4,11 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Globalization;
 using UnityEngine;
+using UnityEditor;
 
 public class PotteryMesh : MonoBehaviour
 {
+    Mesh mesh;
     Vector3[] vertices;
     int[] triangles;
     float[] radius;
@@ -26,9 +28,13 @@ public class PotteryMesh : MonoBehaviour
 
     static float x = 0.5f, y = 0.5f, z = 0.5f;
 
+    public string potteryName;
+    
+
     // Start is called before the first frame update
     void Start()
     {
+        mesh = new Mesh();
         vertices = new Vector3[innerVerticesNum * 2 + 2];
         InitializeRadius();
         SetVertices();
@@ -40,6 +46,10 @@ public class PotteryMesh : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown("f"))
+        {
+            SaveAsset();
+        }
         //need to be changed for VR input
         if (Input.GetKey(KeyCode.D))
         {
@@ -143,6 +153,7 @@ public class PotteryMesh : MonoBehaviour
     void SetRadius()
     {
         //need to be changed for VR input
+        //need more exeption check
 
         for (int i = 0; i <= (int)((defaultRadius - (float)Math.Sqrt(x * x + z * z)) * 100); i++)
         {
@@ -227,7 +238,7 @@ public class PotteryMesh : MonoBehaviour
         }
 
 
-        //buttom
+        //buttom(need to be change..maybe?)
         for (int i = 0; i < verticesPerFloor; i++)
         {
             triangles[6 * i + 2 * innerTrianglesNum + bottomTrianglesNum] = 2 * innerVerticesNum;
@@ -244,11 +255,14 @@ public class PotteryMesh : MonoBehaviour
 
     void DrawMesh()
     {
-        Mesh mesh = new Mesh();
-
         mesh.vertices = vertices;
         mesh.triangles = triangles;
         GetComponent<MeshFilter>().mesh = mesh;
         mesh.RecalculateNormals();
+    }
+
+    void SaveAsset()
+    {
+        AssetDatabase.CreateAsset(mesh, "Assets/SavedPottery/" + potteryName + ".asset");
     }
 }

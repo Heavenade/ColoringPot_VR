@@ -206,13 +206,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 278574204}
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalRotation: {x: 0.4928759, y: -0.20688008, z: 0.15234298, w: 0.8313036}
+  m_LocalPosition: {x: 0, y: 1.546, z: -7.38}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 61.944004, y: -24.332, z: 6.0230002}
 --- !u!1 &581147718
 GameObject:
   m_ObjectHideFlags: 0
@@ -384,7 +384,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1185875119}
   m_LocalRotation: {x: -0.5, y: -0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: 0, y: 0, z: 6.01}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -472,6 +472,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpinningWheel
       objectReference: {fileID: 0}
+    - target: {fileID: 2353780201203429032, guid: 2423c6d1a21ce954aa07aa88d60d99e2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2423c6d1a21ce954aa07aa88d60d99e2, type: 3}
 --- !u!1001 &5845131929086068277
@@ -540,6 +545,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Pottery
+      objectReference: {fileID: 0}
+    - target: {fileID: 5845131928382839338, guid: c27d531dab6e2304a842217b038c79c3,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 5845131928382839339, guid: c27d531dab6e2304a842217b038c79c3,
+        type: 3}
+      propertyPath: name1
+      value: pottery
+      objectReference: {fileID: 0}
+    - target: {fileID: 5845131928382839339, guid: c27d531dab6e2304a842217b038c79c3,
+        type: 3}
+      propertyPath: potteryName
+      value: pottery1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c27d531dab6e2304a842217b038c79c3, type: 3}
