@@ -12,15 +12,15 @@ public class PotteryMesh : MonoBehaviour
     Vector3[] vertices, leftHandVertices, rightHandVertices;
     int[] triangles;
     float[] radius;
-    
+
     static int verticesFloorNum = 100; //number of vertices floor - 1
     static int verticesPerFloor = 20; //number of vertices per floor
-    static float eachHeight = 0.01f; //height between two vertice floors
+    public float eachHeight = 0.01f; //height between two vertice floors
 
     float angle = 360f / (float)verticesPerFloor;
     double radian = Math.PI / 180;
 
-    static float defaultRadius = 0.5f;
+    public float defaultRadius = 0.5f;
 
     int innerVerticesNum = verticesPerFloor * (verticesFloorNum + 1);
     int innerTrianglesNum = 3 * verticesPerFloor * 2 * verticesFloorNum;
@@ -66,8 +66,9 @@ public class PotteryMesh : MonoBehaviour
             float x = handPosition.x;
             float y = handPosition.y;
             float z = handPosition.z;
-            int floor = (int)(y * 100);
-            if (floor < 0 || floor > verticesFloorNum)
+            int floor = (int)(y * (1 / eachHeight));
+
+            if (floor < 0 || floor > verticesFloorNum || (float)Math.Sqrt(x * x + z * z) <= defaultRadius * 0.6)
             {
                 continue;
             }
@@ -112,7 +113,7 @@ public class PotteryMesh : MonoBehaviour
         {
             for (int j = 0; j < verticesPerFloor; j++)
             {
-                vertices[i * verticesPerFloor + j + innerVerticesNum] = new Vector3((float)Math.Sin(angle * j * radian) * (radius[i] - 0.2f), (float)i * eachHeight, (float)Math.Cos(angle * j * radian) * (radius[i] - 0.2f));
+                vertices[i * verticesPerFloor + j + innerVerticesNum] = new Vector3((float)Math.Sin(angle * j * radian) * (radius[i] * 0.6f), (float)i * eachHeight, (float)Math.Cos(angle * j * radian) * (radius[i] * 0.6f));
             }
         }
 
@@ -125,33 +126,33 @@ public class PotteryMesh : MonoBehaviour
         //need to be changed for VR input
         //need more exeption check
 
-        for (int i = 0; i <= (int)((defaultRadius - (float)Math.Sqrt(x * x + z * z)) * 100); i++)
+        for (int i = 0; i <= (int)((defaultRadius - (float)Math.Sqrt(x * x + z * z)) * (int)(1 / eachHeight)); i++)
         {
-            if ((int)(y * 100) + i > verticesFloorNum)
+            if ((int)(y * (int)(1 / eachHeight)) + i > verticesFloorNum)
             {
                 break;
             }
 
-            if (radius[(int)(y * 100) + i] > (float)Math.Sqrt(x * x + z * z) + 0.01f * (float)i)
+            if (radius[(int)(y * (int)(1 / eachHeight)) + i] > (float)Math.Sqrt(x * x + z * z) + eachHeight * (float)i)
             {
-                if ((float)Math.Sqrt(x * x + z * z) + 0.01f * (float)i > 0.2f)
+                if ((float)Math.Sqrt(x * x + z * z) + eachHeight * (float)i > defaultRadius * 0.4)
                 {
-                    radius[(int)(y * 100) + i] = (float)Math.Sqrt(x * x + z * z) + 0.01f * (float)i;
+                    radius[(int)(y * (int)(1 / eachHeight)) + i] = (float)Math.Sqrt(x * x + z * z) + eachHeight * (float)i;
                 }
             }
         }
-        for (int i = 0; i <= (int)((defaultRadius - (float)Math.Sqrt(x * x + z * z)) * 100); i++)
+        for (int i = 0; i <= (int)((defaultRadius - (float)Math.Sqrt(x * x + z * z)) * (int)(1 / eachHeight)); i++)
         {
-            if ((int)(y * 100) - i < 0)
+            if ((int)(y * (int)(1 / eachHeight)) - i < 0)
             {
                 break;
             }
 
-            if (radius[(int)(y * 100) - i] > (float)Math.Sqrt(x * x + z * z) + 0.01f * (float)i)
+            if (radius[(int)(y * (int)(1 / eachHeight)) - i] > (float)Math.Sqrt(x * x + z * z) + eachHeight * (float)i)
             {
-                if ((float)Math.Sqrt(x * x + z * z) + 0.01f * (float)i > 0.2f)
+                if ((float)Math.Sqrt(x * x + z * z) + eachHeight * (float)i > defaultRadius * 0.4)
                 {
-                    radius[(int)(y * 100) - i] = (float)Math.Sqrt(x * x + z * z) + 0.01f * (float)i;
+                    radius[(int)(y * (int)(1 / eachHeight)) - i] = (float)Math.Sqrt(x * x + z * z) + eachHeight * (float)i;
                 }
             }
         }

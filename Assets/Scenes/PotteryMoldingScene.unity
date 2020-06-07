@@ -2400,6 +2400,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5845131928382839316, guid: c27d531dab6e2304a842217b038c79c3,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5845131928382839316, guid: c27d531dab6e2304a842217b038c79c3,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5845131928382839316, guid: c27d531dab6e2304a842217b038c79c3,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5845131928382839336, guid: c27d531dab6e2304a842217b038c79c3,
         type: 3}
       propertyPath: m_Name
@@ -2435,5 +2450,15 @@ PrefabInstance:
       propertyPath: rightHand
       value: 
       objectReference: {fileID: 1800704346}
+    - target: {fileID: 5845131928382839339, guid: c27d531dab6e2304a842217b038c79c3,
+        type: 3}
+      propertyPath: eachHeight
+      value: 0.003
+      objectReference: {fileID: 0}
+    - target: {fileID: 5845131928382839339, guid: c27d531dab6e2304a842217b038c79c3,
+        type: 3}
+      propertyPath: defaultRadius
+      value: 0.15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c27d531dab6e2304a842217b038c79c3, type: 3}
