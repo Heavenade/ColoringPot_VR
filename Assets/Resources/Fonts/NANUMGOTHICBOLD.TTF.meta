@@ -1,0 +1,24 @@
+fileFormatVersion: 2
+guid: 38dfd6719bd2e2f4eba9140bbd10f60b
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: NanumGothic
+  fontNames:
+  - NanumGothic
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 0042bf5e35c6fe944b5c6e570eeaec6d, type: 3}
+  - {fileID: 12800000, guid: 639a627e66c88274fbb9d976c1e0bbce, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
