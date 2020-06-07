@@ -9,7 +9,7 @@ using UnityEditor;
 public class PotteryMesh : MonoBehaviour
 {
     Mesh mesh;
-    Vector3[] vertices;
+    Vector3[] vertices, leftHandVertices, rightHandVertices;
     int[] triangles;
     float[] radius;
     
@@ -26,21 +26,24 @@ public class PotteryMesh : MonoBehaviour
     int innerTrianglesNum = 3 * verticesPerFloor * 2 * verticesFloorNum;
     int bottomTrianglesNum = 3 * verticesPerFloor * 2;
 
-    static float x = 0.5f, y = 0.5f, z = 0.5f;
+    //static float x = 0.5f, y = 0.5f, z = 0.5f;
 
     public string potteryName;
     public Transform craftPointer;
+    public Transform leftHand;
+    public Transform rightHand;
 
     // Start is called before the first frame update
     void Start()
     {
         mesh = new Mesh();
         vertices = new Vector3[innerVerticesNum * 2 + 2];
+        leftHandVertices = leftHand.GetComponent<MeshFilter>().mesh.vertices;
+        rightHandVertices = rightHand.GetComponent<MeshFilter>().mesh.vertices;
         InitializeRadius();
         SetVertices();
         CreateTriangles();
         DrawMesh();
-
     }
 
     // Update is called once per frame
@@ -50,72 +53,37 @@ public class PotteryMesh : MonoBehaviour
         {
             SaveAsset();
         }
-        //need to be changed for VR input
-        if (Input.GetKey(KeyCode.D))
-        {
-            x = x + 0.01f;
-            if (x > 1f)
-            {
-                x = 1f;
-            }
-            Debug.Log("x:" + x + ", y:" + y + ", z:" + z + ", r:" + (float)Math.Sqrt(x * x + z * z));
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            x = x - 0.01f;
-            if (x < 0f)
-            {
-                x = 0f;
-            }
-            Debug.Log("x:" + x + ", y:" + y + ", z:" + z + ", r:" + (float)Math.Sqrt(x * x + z * z));
-        }
-        if (Input.GetKey(KeyCode.W))
-        {
-            y = y + 0.01f;
-            if (y > 1f)
-            {
-                y = 1f;
-            }
-            Debug.Log("x:" + x + ", y:" + y + ", z:" + z + ", r:" + (float)Math.Sqrt(x * x + z * z));
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            y = y - 0.01f;
-            if (y < 0f)
-            {
-                y = 0f;
-            }
-            Debug.Log("x:" + x + ", y:" + y + ", z:" + z + ", r:" + (float)Math.Sqrt(x * x + z * z));
-        }
-        if (Input.GetKey(KeyCode.E))
-        {
-            z = z + 0.01f;
-            if (z < 0f)
-            {
-                z = 0f;
-            }
-            Debug.Log("x:" + x + ", y:" + y + ", z:" + z + ", r:" + (float)Math.Sqrt(x * x + z * z));
-        }
-        if (Input.GetKey(KeyCode.Q))
-        {
-            z = z - 0.01f;
-            if (z < 0f)
-            {
-                z = 0f;
-            }
-            Debug.Log("x:" + x + ", y:" + y + ", z:" + z + ", r:" + (float)Math.Sqrt(x * x + z * z));
-        }
-
-        if (radius[(int)(y * 100)] > (float)Math.Sqrt(x*x+z*z)) //need to be changed for VR input
-        {
-            SetRadius();
-            SetVertices();
-            DrawMesh();
-        }
-
-        craftPointer.localPosition = new Vector3(x, y, z);
+        MoldPottery(leftHand, leftHandVertices);
+        MoldPottery(rightHand, rightHandVertices);
     }
 
+    void MoldPottery(Transform hand, Vector3[] handVertices)
+    {
+        Vector3 handPosition;
+        for (int i = 0; i < handVertices.Length; i++)
+        {
+            handPosition = hand.TransformPoint(handVertices[i]) - this.GetComponent<Transform>().position;
+            float x = handPosition.x;
+            float y = handPosition.y;
+            float z = handPosition.z;
+            int floor = (int)(y * 100);
+            if (floor < 0 || floor > verticesFloorNum)
+            {
+                continue;
+            }
+            else if (radius[floor] > (float)Math.Sqrt(x * x + z * z))
+            {
+                SetRadius(x, y, z);
+                SetVertices();
+                DrawMesh();
+
+                // debug
+                craftPointer.localPosition = new Vector3(x, y, z);
+                handPosition = this.GetComponent<Transform>().TransformPoint(handPosition);
+                Debug.DrawRay(handPosition, handPosition.normalized, Color.blue);
+            }
+        }
+    }
 
     void InitializeRadius()
     {
@@ -152,7 +120,7 @@ public class PotteryMesh : MonoBehaviour
         vertices[2 * innerVerticesNum + 1] = new Vector3(0f, eachHeight, 0f);
     }
 
-    void SetRadius()
+    void SetRadius(float x, float y, float z)
     {
         //need to be changed for VR input
         //need more exeption check

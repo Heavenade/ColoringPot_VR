@@ -1132,6 +1132,26 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5845131929086068277}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1313933768 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 144230, guid: dc06161b6d97feb419f45f03b62e14b9,
+    type: 3}
+  m_PrefabInstance: {fileID: 1819777300}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1313933769 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 476540, guid: dc06161b6d97feb419f45f03b62e14b9,
+    type: 3}
+  m_PrefabInstance: {fileID: 1819777300}
+  m_PrefabAsset: {fileID: 0}
+--- !u!33 &1313933773
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1313933768}
+  m_Mesh: {fileID: 4300000, guid: 02d2c3f5b5ca1014c8fb700e729167ae, type: 3}
 --- !u!1 &1576636061
 GameObject:
   m_ObjectHideFlags: 0
@@ -2130,6 +2150,26 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1771606865}
   m_Mesh: {fileID: 0}
+--- !u!1 &1800704345 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 160596, guid: dc06161b6d97feb419f45f03b62e14b9,
+    type: 3}
+  m_PrefabInstance: {fileID: 1819777300}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1800704346 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 485514, guid: dc06161b6d97feb419f45f03b62e14b9,
+    type: 3}
+  m_PrefabInstance: {fileID: 1819777300}
+  m_PrefabAsset: {fileID: 0}
+--- !u!33 &1800704350
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1800704345}
+  m_Mesh: {fileID: 4300000, guid: 02d2c3f5b5ca1014c8fb700e729167ae, type: 3}
 --- !u!1001 &1819777300
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2385,5 +2425,15 @@ PrefabInstance:
       propertyPath: craftPointer
       value: 
       objectReference: {fileID: 1013396734}
+    - target: {fileID: 5845131928382839339, guid: c27d531dab6e2304a842217b038c79c3,
+        type: 3}
+      propertyPath: leftHand
+      value: 
+      objectReference: {fileID: 1313933769}
+    - target: {fileID: 5845131928382839339, guid: c27d531dab6e2304a842217b038c79c3,
+        type: 3}
+      propertyPath: rightHand
+      value: 
+      objectReference: {fileID: 1800704346}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c27d531dab6e2304a842217b038c79c3, type: 3}
