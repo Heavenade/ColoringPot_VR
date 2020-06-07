@@ -29,7 +29,7 @@ public class PotteryMesh : MonoBehaviour
     static float x = 0.5f, y = 0.5f, z = 0.5f;
 
     public string potteryName;
-    
+    public Transform craftPointer;
 
     // Start is called before the first frame update
     void Start()
@@ -112,6 +112,8 @@ public class PotteryMesh : MonoBehaviour
             SetVertices();
             DrawMesh();
         }
+
+        craftPointer.localPosition = new Vector3(x, y, z);
     }
 
 
