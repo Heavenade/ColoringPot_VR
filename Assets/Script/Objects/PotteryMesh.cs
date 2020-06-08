@@ -32,8 +32,10 @@ public class PotteryMesh : MonoBehaviour
     public Transform craftPointer;
     public Transform leftHand;
     public Transform rightHand;
-    public Transform debugWrapper;
-    public Transform[] debugPointers;
+    public Transform debugLeft;
+    public Transform debugRight;
+    private Transform[] debugLeftPointers;
+    private Transform[] debugRightPointers;
 
     // Start is called before the first frame update
     void Start()
@@ -42,16 +44,22 @@ public class PotteryMesh : MonoBehaviour
         vertices = new Vector3[innerVerticesNum * 2 + 2];
         leftHandVertices = leftHand.GetComponent<MeshFilter>().mesh.vertices;
         rightHandVertices = rightHand.GetComponent<MeshFilter>().mesh.vertices;
-        debugPointers = new Transform[leftHandVertices.Length*2];
+        debugLeftPointers = new Transform[leftHandVertices.Length];
+        debugRightPointers = new Transform[rightHandVertices.Length];
         InitializeRadius();
         SetVertices();
         CreateTriangles();
         DrawMesh();
 
-        for (int i = 0; i < leftHandVertices.Length*2; i++)
+        for (int i = 0; i < leftHandVertices.Length; i++)
         {
-            debugPointers[i] = Instantiate(craftPointer, new Vector3(0, 0, 0), Quaternion.identity);
-            debugPointers[i].transform.parent = debugWrapper.transform;
+            debugLeftPointers[i] = Instantiate(craftPointer, new Vector3(0, 0, 0), Quaternion.identity);
+            debugLeftPointers[i].transform.parent = debugLeft.transform;
+        }
+        for (int i = 0; i < rightHandVertices.Length; i++)
+        {
+            debugRightPointers[i] = Instantiate(craftPointer, new Vector3(0, 0, 0), Quaternion.identity);
+            debugRightPointers[i].transform.parent = debugRight.transform;
         }
     }
 
@@ -79,9 +87,9 @@ public class PotteryMesh : MonoBehaviour
 
             // debug
             if (hand == leftHand)
-                debugPointers[i].localPosition = new Vector3(x, y, z);
+                debugLeftPointers[i].localPosition = new Vector3(x, y, z);
             else if (hand == rightHand)
-                debugPointers[leftHandVertices.Length+i].localPosition = new Vector3(x, y, z);
+                debugRightPointers[i].localPosition = new Vector3(x, y, z);
 
             if (floor < 0 || floor > verticesFloorNum || (float)Math.Sqrt(x * x + z * z) <= defaultRadius * 0.6)
             {
