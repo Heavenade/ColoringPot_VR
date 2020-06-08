@@ -32,6 +32,8 @@ public class PotteryMesh : MonoBehaviour
     public Transform craftPointer;
     public Transform leftHand;
     public Transform rightHand;
+    public Transform debugWrapper;
+    public Transform[] debugPointers;
 
     // Start is called before the first frame update
     void Start()
@@ -40,10 +42,17 @@ public class PotteryMesh : MonoBehaviour
         vertices = new Vector3[innerVerticesNum * 2 + 2];
         leftHandVertices = leftHand.GetComponent<MeshFilter>().mesh.vertices;
         rightHandVertices = rightHand.GetComponent<MeshFilter>().mesh.vertices;
+        debugPointers = new Transform[leftHandVertices.Length*2];
         InitializeRadius();
         SetVertices();
         CreateTriangles();
         DrawMesh();
+
+        for (int i = 0; i < leftHandVertices.Length*2; i++)
+        {
+            debugPointers[i] = Instantiate(craftPointer, new Vector3(0, 0, 0), Quaternion.identity);
+            debugPointers[i].transform.parent = debugWrapper.transform;
+        }
     }
 
     // Update is called once per frame
@@ -68,6 +77,12 @@ public class PotteryMesh : MonoBehaviour
             float z = handPosition.z;
             int floor = (int)(y * (1 / eachHeight));
 
+            // debug
+            if (hand == leftHand)
+                debugPointers[i].localPosition = new Vector3(x, y, z);
+            else if (hand == rightHand)
+                debugPointers[leftHandVertices.Length+i].localPosition = new Vector3(x, y, z);
+
             if (floor < 0 || floor > verticesFloorNum || (float)Math.Sqrt(x * x + z * z) <= defaultRadius * 0.6)
             {
                 continue;
@@ -77,11 +92,6 @@ public class PotteryMesh : MonoBehaviour
                 SetRadius(x, y, z);
                 SetVertices();
                 DrawMesh();
-
-                // debug
-                craftPointer.localPosition = new Vector3(x, y, z);
-                handPosition = this.GetComponent<Transform>().TransformPoint(handPosition);
-                Debug.DrawRay(handPosition, handPosition.normalized, Color.blue);
             }
         }
     }
