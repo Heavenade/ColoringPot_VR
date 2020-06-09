@@ -5,6 +5,7 @@ using System.Collections.Specialized;
 using System.Globalization;
 using UnityEngine;
 using UnityEditor;
+using Valve.VR;
 
 public class PotteryMesh : MonoBehaviour
 {
@@ -25,6 +26,9 @@ public class PotteryMesh : MonoBehaviour
     int innerVerticesNum = verticesPerFloor * (verticesFloorNum + 1);
     int innerTrianglesNum = 3 * verticesPerFloor * 2 * verticesFloorNum;
     int bottomTrianglesNum = 3 * verticesPerFloor * 2;
+
+    public SteamVR_Action_Boolean interactionUI;
+
 
     //static float x = 0.5f, y = 0.5f, z = 0.5f;
 
@@ -70,8 +74,14 @@ public class PotteryMesh : MonoBehaviour
         {
             SaveAsset();
         }
-        MoldPottery(leftHand, leftHandVertices);
-        MoldPottery(rightHand, rightHandVertices);
+
+        // SteamVR의 Interact UI 버튼을 누르고 있을 시에만 작동하게 합니다.
+        bool isPressingTrigger = interactionUI.GetState(SteamVR_Input_Sources.Any);
+        if (isPressingTrigger)
+        {
+            MoldPottery(leftHand, leftHandVertices);
+            MoldPottery(rightHand, rightHandVertices);
+        }
     }
 
     void MoldPottery(Transform hand, Vector3[] handVertices)
@@ -86,10 +96,10 @@ public class PotteryMesh : MonoBehaviour
             int floor = (int)(y * (1 / eachHeight));
 
             // debug
-            if (hand == leftHand)
-                debugLeftPointers[i].localPosition = new Vector3(x, y, z);
-            else if (hand == rightHand)
-                debugRightPointers[i].localPosition = new Vector3(x, y, z);
+            //if (hand == leftHand)
+            //    debugLeftPointers[i].localPosition = new Vector3(x, y, z);
+            //else if (hand == rightHand)
+            //    debugRightPointers[i].localPosition = new Vector3(x, y, z);
 
             if (floor < 0 || floor > verticesFloorNum || (float)Math.Sqrt(x * x + z * z) <= defaultRadius * 0.6)
             {
