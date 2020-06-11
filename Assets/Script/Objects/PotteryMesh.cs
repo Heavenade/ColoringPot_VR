@@ -14,7 +14,7 @@ public class PotteryMesh : MonoBehaviour
     float[] radius;
 
     static int verticesFloorNum = 100; //number of vertices floor - 1
-    static int verticesPerFloor = 20; //number of vertices per floor
+    static int verticesPerFloor = 60; //number of vertices per floor
     public float eachHeight = 0.01f; //height between two vertice floors
 
     float angle = 360f / (float)verticesPerFloor;
