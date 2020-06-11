@@ -10,7 +10,7 @@ using Valve.VR;
 public class PotteryMesh : MonoBehaviour
 {
     Mesh mesh;
-    Vector3[] vertices, leftHandVertices, rightHandVertices;
+    Vector3[] vertices;
     int[] triangles;
     float[] radius;
 
@@ -46,22 +46,17 @@ public class PotteryMesh : MonoBehaviour
     {
         mesh = new Mesh();
         vertices = new Vector3[innerVerticesNum * 2 + 2];
-        leftHandVertices = leftHand.GetComponent<MeshFilter>().mesh.vertices;
-        rightHandVertices = rightHand.GetComponent<MeshFilter>().mesh.vertices;
-        debugLeftPointers = new Transform[leftHandVertices.Length];
-        debugRightPointers = new Transform[rightHandVertices.Length];
+        debugLeftPointers = new Transform[31];
+        debugRightPointers = new Transform[31];
         InitializeRadius();
         SetVertices();
         CreateTriangles();
         DrawMesh();
 
-        for (int i = 0; i < leftHandVertices.Length; i++)
+        for (int i = 0; i < 31; i++)
         {
             debugLeftPointers[i] = Instantiate(craftPointer, new Vector3(0, 0, 0), Quaternion.identity);
             debugLeftPointers[i].transform.parent = debugLeft.transform;
-        }
-        for (int i = 0; i < rightHandVertices.Length; i++)
-        {
             debugRightPointers[i] = Instantiate(craftPointer, new Vector3(0, 0, 0), Quaternion.identity);
             debugRightPointers[i].transform.parent = debugRight.transform;
         }
@@ -79,38 +74,53 @@ public class PotteryMesh : MonoBehaviour
         bool isPressingTrigger = interactionUI.GetState(SteamVR_Input_Sources.Any);
         if (isPressingTrigger)
         {
-            MoldPottery(leftHand, leftHandVertices);
-            MoldPottery(rightHand, rightHandVertices);
+            MoldPottery(leftHand);
+            MoldPottery(rightHand);
         }
     }
 
-    void MoldPottery(Transform hand, Vector3[] handVertices)
+    void MoldPottery(Transform hand)
     {
         Vector3 handPosition;
-        for (int i = 0; i < handVertices.Length; i++)
+        SteamVR_Behaviour_Skeleton skeleton;
+        Transform[] debugPointers;
+        try
         {
-            handPosition = hand.TransformPoint(handVertices[i]) - this.GetComponent<Transform>().position;
-            float x = handPosition.x;
-            float y = handPosition.y;
-            float z = handPosition.z;
-            int floor = (int)(y * (1 / eachHeight));
-
-            // debug
-            //if (hand == leftHand)
-            //    debugLeftPointers[i].localPosition = new Vector3(x, y, z);
-            //else if (hand == rightHand)
-            //    debugRightPointers[i].localPosition = new Vector3(x, y, z);
-
-            if (floor < 0 || floor > verticesFloorNum || (float)Math.Sqrt(x * x + z * z) <= defaultRadius * 0.6)
+            if (hand == leftHand)
             {
-                continue;
+                skeleton = hand.Find("LeftRenderModel(Clone)").Find("vr_glove_left(Clone)").GetComponent<SteamVR_Behaviour_Skeleton>();
+                debugPointers = debugLeftPointers;
             }
-            else if (radius[floor] > (float)Math.Sqrt(x * x + z * z))
+            else
             {
-                SetRadius(x, y, z);
-                SetVertices();
-                DrawMesh();
+                skeleton = hand.Find("RightRenderModel(Clone)").Find("vr_glove_right(Clone)").GetComponent<SteamVR_Behaviour_Skeleton>();
+                debugPointers = debugRightPointers;
             }
+            for (int i = 1; i < 26; i++)
+            {
+                handPosition = skeleton.GetBonePosition(i);
+                float x = handPosition.x - this.transform.position.x;
+                float y = handPosition.y - this.transform.position.y;
+                float z = handPosition.z - this.transform.position.z;
+                int floor = (int)(y * (1 / eachHeight));
+
+                // debug
+                //debugPointers[i].position = new Vector3(handPosition.x, handPosition.y, handPosition.z);
+
+                if (floor < 0 || floor > verticesFloorNum || (float)Math.Sqrt(x * x + z * z) <= defaultRadius * 0.6)
+                {
+                    continue;
+                }
+                else if (radius[floor] > (float)Math.Sqrt(x * x + z * z))
+                {
+                    SetRadius(x, y, z);
+                    SetVertices();
+                    DrawMesh();
+                }
+            }
+        }
+        catch
+        {
         }
     }
 
