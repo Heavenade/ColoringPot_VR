@@ -6,19 +6,20 @@ using UnityEditor;
 using System.Collections.Specialized;
 using System.Security.Cryptography;
 using System.Globalization;
+using System.IO;
 
 public class PotteryColoring : MonoBehaviour
 {
     Mesh potteryMesh;
     Vector3[] potteryVertices, brushVertices;
 
-    public string potteryName;
     public Transform brush;
     public int colorNum = 1;
 
     // Start is called before the first frame update
     void Start()
     {
+        string potteryName = "workingPottery";
         //call mesh
         potteryMesh = (Mesh)AssetDatabase.LoadAssetAtPath("Assets/SavedPottery/" + potteryName + ".asset", typeof(Mesh));
         brushVertices = brush.GetComponent<MeshFilter>().mesh.vertices;
@@ -104,5 +105,32 @@ public class PotteryColoring : MonoBehaviour
         potteryMesh.colors = colors;
     }
 
+    //file saved- > true, not saved -> false
+    public bool SavePottery()
+    {
+        bool isSaved = false;
+        string savingPotteryPath;
+        string sourcePotteryPath = "Assets/SavedPottery/workingPottery.asset";
+        
+        //max number of storable pottery
+        int maxStorablePotteryNum = 3;
 
+        for(int i = 1; i <= maxStorablePotteryNum; i++)
+        {
+            savingPotteryPath = "Assets/SavedPottery/pottery" + i + ".asset";
+           
+            FileInfo isPotteryFile = new FileInfo(savingPotteryPath);
+            if(isPotteryFile.Exists == false)
+            {
+                //파일저장
+                AssetDatabase.CopyAsset(sourcePotteryPath, savingPotteryPath);
+                isSaved = true;
+                return isSaved;
+            }
+        }
+
+        return isSaved;
+    }
+
+    
 }

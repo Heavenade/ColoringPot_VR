@@ -32,7 +32,6 @@ public class PotteryMesh : MonoBehaviour
 
     //static float x = 0.5f, y = 0.5f, z = 0.5f;
 
-    public string potteryName;
     public Transform craftPointer;
     public Transform leftHand;
     public Transform rightHand;
@@ -67,7 +66,7 @@ public class PotteryMesh : MonoBehaviour
     {
         if (Input.GetKeyDown("f"))
         {
-            SaveAsset();
+            SavePottery();
         }
 
         // SteamVR의 Interact UI 버튼을 누르고 있을 시에만 작동하게 합니다.
@@ -270,8 +269,9 @@ public class PotteryMesh : MonoBehaviour
         mesh.RecalculateNormals();
     }
 
-    void SaveAsset()
+    public void SavePottery()
     {
+        string potteryName = "workingPottery";
         AssetDatabase.CreateAsset(mesh, "Assets/SavedPottery/" + potteryName + ".asset");
     }
 }

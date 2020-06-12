@@ -16,7 +16,14 @@ public class MovingSphere : MonoBehaviour
     void Update()
     {
         Vector3 position = this.transform.position;
-        
+
+        //save
+        if (Input.GetKeyDown("f"))
+        {
+            bool isSaved = pottery.SavePottery();
+            Debug.Log(isSaved);
+        }
+
         //color change
         if (Input.GetKey(KeyCode.Z))
         {
