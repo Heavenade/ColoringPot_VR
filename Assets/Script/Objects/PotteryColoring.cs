@@ -66,7 +66,7 @@ public class PotteryColoring : MonoBehaviour
 
             for(int j = 0; j < potteryVertices.Length; j++)
             {
-               if((float)Math.Sqrt((potteryVertices[j].x-x)* (potteryVertices[j].x - x)+ (potteryVertices[j].y - y)* (potteryVertices[j].y - y)+ (potteryVertices[j].z - z)* (potteryVertices[j].z - z)) < 0.01f)
+                if (potteryVertices[j].x - x <= 0.01f && potteryVertices[j].x - x >= -0.01f && potteryVertices[j].y - y <= 0.01f && potteryVertices[j].y - y >= -0.01f && potteryVertices[j].z - z <= 0.01f && potteryVertices[j].z - z >= -0.01f)
                 {
                     colors[j] = Color.red;
                 }
