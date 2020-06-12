@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MovingSphere : MonoBehaviour
 {
+    public PotteryColoring pottery;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,6 +16,35 @@ public class MovingSphere : MonoBehaviour
     void Update()
     {
         Vector3 position = this.transform.position;
+        
+        //color change
+        if (Input.GetKey(KeyCode.Z))
+        {
+            pottery.colorNum = 1;
+        }
+        if (Input.GetKey(KeyCode.X))
+        {
+            pottery.colorNum = 2;
+        }
+        if (Input.GetKey(KeyCode.C))
+        {
+            pottery.colorNum = 3;
+        }
+        if (Input.GetKey(KeyCode.V))
+        {
+            pottery.colorNum = 4;
+        }
+        if (Input.GetKey(KeyCode.B))
+        {
+            pottery.colorNum = 5;
+        }
+        if (Input.GetKey(KeyCode.N))
+        {
+            pottery.colorNum = 6;
+        }
+        
+
+        //move brush
         if (Input.GetKey(KeyCode.D))
         {
             position.x = position.x + 0.01f;

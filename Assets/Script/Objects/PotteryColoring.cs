@@ -14,6 +14,7 @@ public class PotteryColoring : MonoBehaviour
 
     public string potteryName;
     public Transform brush;
+    public int colorNum = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -29,7 +30,7 @@ public class PotteryColoring : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Coloring(brush, brushVertices);
+        Coloring(brush, brushVertices, colorNum);
         DrawMesh();
     }
 
@@ -51,7 +52,8 @@ public class PotteryColoring : MonoBehaviour
         potteryMesh.colors = colors;
     }
 
-    void Coloring(Transform brush, Vector3[] brushVertices)
+    //colorNum: 1->red, 2->blue, 3->green, 4->yellow, 5->white, 6->black
+    void Coloring(Transform brush, Vector3[] brushVertices, int colorNum)
     {
         Vector3 brushPosition;
         Vector3[] potteryVertices = potteryMesh.vertices;
@@ -66,9 +68,36 @@ public class PotteryColoring : MonoBehaviour
 
             for(int j = 0; j < potteryVertices.Length; j++)
             {
-               if((float)Math.Sqrt((potteryVertices[j].x-x)* (potteryVertices[j].x - x)+ (potteryVertices[j].y - y)* (potteryVertices[j].y - y)+ (potteryVertices[j].z - z)* (potteryVertices[j].z - z)) < 0.01f)
+                if (potteryVertices[j].x - x <= 0.01f && potteryVertices[j].x - x >= -0.01f && potteryVertices[j].y - y <= 0.01f && potteryVertices[j].y - y >= -0.01f && potteryVertices[j].z - z <= 0.01f && potteryVertices[j].z - z >= -0.01f)
                 {
-                    colors[j] = Color.red;
+                    if(colorNum == 1)
+                    {
+                        colors[j] = Color.red;
+                    }
+                    else if(colorNum == 2)
+                    {
+                        colors[j] = Color.blue;
+                    }
+                    else if (colorNum == 3)
+                    {
+                        colors[j] = Color.green;
+                    }
+                    else if (colorNum == 4)
+                    {
+                        colors[j] = Color.yellow;
+                    }
+                    else if (colorNum == 5)
+                    {
+                        colors[j] = Color.white;
+                    }
+                    else if (colorNum == 6)
+                    {
+                        colors[j] = Color.black;
+                    }
+                    else
+                    {
+                        break;
+                    }
                 }
             }
         }
