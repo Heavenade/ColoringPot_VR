@@ -34,6 +34,7 @@ public class BakeDialog : MonoBehaviour
             bool touchPadValue = touchPadAction.GetState(SteamVR_Input_Sources.RightHand);
             if (touchPadValue)
             {
+                Debug.Log("RIGHT");
                 if (this.transform.localScale.Equals(new Vector3(0, 0, 0)))
                 {
                     showMenu();
