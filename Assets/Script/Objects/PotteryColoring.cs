@@ -19,10 +19,15 @@ public class PotteryColoring : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        string potteryName = "workingPottery";
         //call mesh
-        //potteryMesh = (Mesh)AssetDatabase.LoadAssetAtPath("Assets/SavedPottery/" + potteryName + ".asset", typeof(Mesh));
-        potteryMesh = GameManager.instance.potteryMesh;
+        if (GameManager.instance.potteryMesh == null)
+        {
+            potteryMesh = (Mesh)AssetDatabase.LoadAssetAtPath("Assets/Resources/Prefab/SamplePottery.asset", typeof(Mesh));
+        }
+        else
+        {
+            potteryMesh = GameManager.instance.potteryMesh;
+        }
         brushVertices = brush.GetComponent<MeshFilter>().mesh.vertices;
         InitializeMeshColor();
         DrawMesh();
