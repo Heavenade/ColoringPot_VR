@@ -21,7 +21,8 @@ public class PotteryColoring : MonoBehaviour
     {
         string potteryName = "workingPottery";
         //call mesh
-        potteryMesh = (Mesh)AssetDatabase.LoadAssetAtPath("Assets/SavedPottery/" + potteryName + ".asset", typeof(Mesh));
+        //potteryMesh = (Mesh)AssetDatabase.LoadAssetAtPath("Assets/SavedPottery/" + potteryName + ".asset", typeof(Mesh));
+        potteryMesh = GameManager.instance.potteryMesh;
         brushVertices = brush.GetComponent<MeshFilter>().mesh.vertices;
         InitializeMeshColor();
         DrawMesh();

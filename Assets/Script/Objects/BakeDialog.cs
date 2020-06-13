@@ -5,8 +5,9 @@ using UnityEngine.SceneManagement;
 using Valve.VR;
 using Valve.VR.Extras;
 
-public class QuitDialog : MonoBehaviour
+public class BakeDialog : MonoBehaviour
 {
+    public MeshFilter pottery;
     public SteamVR_LaserPointer leftPointer;
     public SteamVR_LaserPointer rightPointer;
     public SteamVR_Action_Boolean touchPadAction;
@@ -30,7 +31,7 @@ public class QuitDialog : MonoBehaviour
         {
             tick = curTick;
 
-            bool touchPadValue = touchPadAction.GetState(SteamVR_Input_Sources.LeftHand);
+            bool touchPadValue = touchPadAction.GetState(SteamVR_Input_Sources.RightHand);
             if (touchPadValue)
             {
                 if (this.transform.localScale.Equals(new Vector3(0, 0, 0)))
@@ -47,9 +48,10 @@ public class QuitDialog : MonoBehaviour
 
     private void PointerClick(object sender, PointerEventArgs e)
     {
-        if (e.target.name == "QuitButton")
+        if (e.target.name == "BakeButton")
         {
-            SceneManager.LoadScene(sceneName: "StartScene");
+            GameManager.instance.potteryMesh = pottery.mesh;
+            SceneManager.LoadScene(sceneName: "ColoringScene");
         }
         else if (e.target.name == "ResumeButton")
         {
