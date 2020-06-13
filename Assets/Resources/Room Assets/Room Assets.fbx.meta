@@ -1,0 +1,249 @@
+fileFormatVersion: 2
+guid: 6447ddbf154d3e94b99f093aa91210cb
+ModelImporter:
+  serializedVersion: 19300
+  internalIDToNameTable:
+  - first:
+      74: 1827226128182048838
+    second: Take 001
+  externalObjects:
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Areca palm COL
+    second: {fileID: 2800000, guid: 4ff3ead1721e12a47b88e526aa1879d5, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Cactus2 001
+    second: {fileID: 2800000, guid: 03e844b77b23c6d448bdbae9ed43bcfb, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Cactus2 COL
+    second: {fileID: 2800000, guid: 72bf7e8e0667aaf43a24df10323f13d7, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Corn plant COL
+    second: {fileID: 2800000, guid: 9059432cca03dd14abdebce3017d2319, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Flower pot1 COL
+    second: {fileID: 2800000, guid: b2669b387ea32ea4f9334cea678b744f, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Flower pot2 COL
+    second: {fileID: 2800000, guid: 27d56e26793009d4ba431fc2ea16c001, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Leaves COL
+    second: {fileID: 2800000, guid: 61239b7e4bf29ba45826e629777a9ab6, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Orchid
+    second: {fileID: 2800000, guid: b68dfe0d84eb2f74a9888eaed6c70aff, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Orchid 2
+    second: {fileID: 2800000, guid: 7343766a27e71c84ba7eb91cec80b61a, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Plant COL
+    second: {fileID: 2800000, guid: 8a90efb65be8d744ca6b99b7717c44d5, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Snake plant COL
+    second: {fileID: 2800000, guid: e469d9b728b09b943aead7055aa6f6d8, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Soil1 COL
+    second: {fileID: 2800000, guid: 8cb3319a6b7f0ae4b8b38fbc9f94d887, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Soil2 COL
+    second: {fileID: 2800000, guid: c91437fb829d389409600cd134136d22, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Stone COL
+    second: {fileID: 2800000, guid: e0ae206c57346eb4287b0fda0d0eddc2, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Wood maple.jpg-diffuse
+    second: {fileID: 2800000, guid: 3857a8344df69764a85288fec8fa5241, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: armchair_fabric_color
+    second: {fileID: 2800000, guid: 775469e89930fe949b6d0e5b2a96eb41, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: armchair_wood_color
+    second: {fileID: 2800000, guid: d800502a5e21fb54eb132da5fe0827fb, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: brush
+    second: {fileID: 2800000, guid: 4249d7dd102bc7e4089b4a108e2b1ef6, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: cement wall
+    second: {fileID: 2800000, guid: a9762dc20979373489c82cbcf7fd61f2, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: door wood
+    second: {fileID: 2800000, guid: 3d2e47dc37727d04fb64a0120e82afcd, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: flask philodendron COL
+    second: {fileID: 2800000, guid: 7a86c39422316e84d8a764ff70e44446, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: 'flask philodendron2 '
+    second: {fileID: 2800000, guid: 536eb81457a16754da0dc165225c2cf0, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: floor
+    second: {fileID: 2800000, guid: 1a717af5a18388b4ea9ffcaac6385f65, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: glina 1
+    second: {fileID: 2800000, guid: 87d134ab0e03bad4b8eb9ba49c57a28d, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: shelf
+    second: {fileID: 2800000, guid: 07c407af228e8934fa88ab1290a67b00, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: table
+    second: {fileID: 2800000, guid: 61323b6ad5c4b09429e72917823ad18a, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: table top
+    second: {fileID: 2800000, guid: 72971dd2927cf7d4ea3a823756698841, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: texfile2
+    second: {fileID: 2800000, guid: 319d0edde65097349a1aed5d6f65c285, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: wood_2
+    second: {fileID: 2800000, guid: 3c8d28e9ebece7942ac433997973a2d8, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: wood_3
+    second: {fileID: 2800000, guid: 564f2d019b210d940afe01f04abd5642, type: 3}
+  materials:
+    materialImportMode: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
