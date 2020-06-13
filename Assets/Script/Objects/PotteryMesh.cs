@@ -6,6 +6,7 @@ using System.Globalization;
 using UnityEngine;
 using UnityEditor;
 using Valve.VR;
+using System.Linq;
 
 public class PotteryMesh : MonoBehaviour
 {
@@ -272,6 +273,6 @@ public class PotteryMesh : MonoBehaviour
     public void SavePottery()
     {
         string potteryName = "workingPottery";
-        AssetDatabase.CreateAsset(mesh, "Assets/SavedPottery/" + potteryName + ".asset");
+        PrefabUtility.SaveAsPrefabAsset(this.gameObject, "Assets/SavedPottery/" + potteryName + ".prefab");
     }
 }
