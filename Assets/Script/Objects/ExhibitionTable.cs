@@ -31,6 +31,8 @@ public class ExhibitionTable : MonoBehaviour
 
     private List<GameObject> dojagiPrefabs;
     private List<Dojagi> dojagiInfos;
+
+    private GameObject player;
     private string[] datas;
     private GameObject tables; // 각 도자기들의 부모는 table. table 들의 부모는 tables.
 
@@ -41,8 +43,7 @@ public class ExhibitionTable : MonoBehaviour
         dojagiPrefabs = new List<GameObject>();
         dojagiInfos = new List<Dojagi>();
         tables = GameObject.Find("Tables");
-
-       
+        player = GameObject.Find("Player");
 
         InitSaveInfos();
         InitDisplayDojagi();
@@ -54,6 +55,27 @@ public class ExhibitionTable : MonoBehaviour
         {
             DeleteDojagi(Click);
         }
+
+        Vector3 MoveArrow = Vector3.zero;
+        if (Input.GetKey(KeyCode.W))
+        {
+            MoveArrow += Vector3.forward;
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            MoveArrow += Vector3.back;
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            MoveArrow += Vector3.left;
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            MoveArrow += Vector3.right;
+        }
+
+        MoveArrow = MoveArrow.normalized * Time.deltaTime;
+        player.transform.position += MoveArrow;
     }
 
     // Private Func
@@ -121,6 +143,7 @@ public class ExhibitionTable : MonoBehaviour
 
                     target.transform.parent = tables.transform.GetChild(dt.location);
                     target.transform.localPosition = Vector3.zero;
+                    target.transform.localScale = Vector3.one;
                 }
 
             }

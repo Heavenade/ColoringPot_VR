@@ -5,7 +5,7 @@
       "app_key": "application.generated.unity.newunityproject.exe",
       "launch_type": "url",
       "url": "steam://launch/",
-      "action_manifest_path": "D:\\GitHub\\ColoringPot_VR\\Assets\\StreamingAssets\\SteamVR\\actions.json",
+      "action_manifest_path": "C:\\Users\\PandoraCube06\\Documents\\GitHub\\ColoringPot_VR\\Assets\\StreamingAssets\\SteamVR\\actions.json",
       "strings": {
         "en_us": {
           "name": "ColoringPot_VR [Testing]"
