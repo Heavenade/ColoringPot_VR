@@ -6,6 +6,7 @@ using UnityEditor;
 using System.IO;
 using System.Linq;
 using Valve.VR.InteractionSystem;
+using Valve.VR;
 
 class Dojagi
 {
@@ -24,6 +25,8 @@ public class ExhibitionTable : MonoBehaviour
     // - 조형물의 위치 이동 기능
     //
 
+    public SteamVR_Action_Vector2 touchpadControl;
+    public float moveSpeed = 2.0f;
     public GameObject Click;
 
     private string dojagiPath = "Assets/SavedPottery/";
@@ -31,6 +34,8 @@ public class ExhibitionTable : MonoBehaviour
 
     private List<GameObject> dojagiPrefabs;
     private List<Dojagi> dojagiInfos;
+
+    private GameObject player;
     private string[] datas;
     private GameObject tables; // 각 도자기들의 부모는 table. table 들의 부모는 tables.
 
@@ -41,8 +46,7 @@ public class ExhibitionTable : MonoBehaviour
         dojagiPrefabs = new List<GameObject>();
         dojagiInfos = new List<Dojagi>();
         tables = GameObject.Find("Tables");
-
-       
+        player = GameObject.Find("Player");
 
         InitSaveInfos();
         InitDisplayDojagi();
@@ -53,6 +57,25 @@ public class ExhibitionTable : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.X))
         {
             DeleteDojagi(Click);
+        }
+
+        // 플레이어 이동
+        Vector2 t = touchpadControl.GetAxis(SteamVR_Input_Sources.Any);
+        if (t != Vector2.zero)
+        {
+            Vector3 dir = Camera.main.transform.localRotation * Vector3.forward;
+            Vector3 dirt = new Vector3(dir.x, 0, dir.z);
+
+            if (t.y >= 0)
+            {
+                //바라보는 시점 방향으로 이동합니다.
+                player.transform.position += dirt * moveSpeed * Time.deltaTime;
+            }
+            else
+            {
+                player.transform.position += -dirt * moveSpeed * Time.deltaTime;
+
+            }
         }
     }
 
@@ -121,6 +144,7 @@ public class ExhibitionTable : MonoBehaviour
 
                     target.transform.parent = tables.transform.GetChild(dt.location);
                     target.transform.localPosition = Vector3.zero;
+                    target.transform.localScale = Vector3.one;
                 }
 
             }
