@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: cf0da9c9cbf4d3440a7461a66f0f896a
+=======
+guid: d3401cd8316afda4cb44f3ae45bea5ce
+>>>>>>> origin/갤러리-2
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

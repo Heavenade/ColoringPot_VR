@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 5a1582f1687438f4ebac44cd78d66a10
+=======
+guid: 89c225d8bc6753d4996f55810e238abc
+>>>>>>> origin/갤러리-2
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 0
