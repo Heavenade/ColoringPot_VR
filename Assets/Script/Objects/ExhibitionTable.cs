@@ -64,18 +64,16 @@ public class ExhibitionTable : MonoBehaviour
         if (t != Vector2.zero)
         {
             Vector3 dir = Camera.main.transform.localRotation * Vector3.forward;
-            //카메라가 바라보는 방향으로 팩맨도 바라보게 합니다.
-            //팩맨의 Rotation.x값을 freeze해놓았지만 움직여서 따로 Rotation값을 0으로 세팅해주었습니다.
-            transform.localRotation = new Quaternion(0, transform.localRotation.y, 0, transform.localRotation.w);
+            Vector3 dirt = new Vector3(dir.x, 0, dir.z);
 
             if (t.y >= 0)
             {
                 //바라보는 시점 방향으로 이동합니다.
-                player.transform.position += dir * moveSpeed * Time.deltaTime;
+                player.transform.position += dirt * moveSpeed * Time.deltaTime;
             }
             else
             {
-                player.transform.position += -dir * moveSpeed * Time.deltaTime;
+                player.transform.position += -dirt * moveSpeed * Time.deltaTime;
 
             }
         }
