@@ -1,0 +1,25 @@
+
+This is a low-polygon model of Potted Spider Plant
+(Chlorophytum comosum)
+
+Available in three different formats.
+Blender .blend ,  FBX and OBJ.
+............................................
+
+Animated Heaven - Designs of Eternity
+animatedheaven.weebly.com
+---------------------------------------------
+
+Software used: Blender 2.8, Krita and njob.
+
+Texture Maps: Base Color, Metallic, Normal, Roughess 
+2048 x 2048 PNG (total 8 images)
+
+UV Mapped - Yes ( Non Overlapping UVs )
+
+Faces : 3984
+Vertices  : 3561
+Tris: 6155
+
+Renderer   : Blender Eevee
+
