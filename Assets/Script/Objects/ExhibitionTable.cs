@@ -6,6 +6,7 @@ using UnityEditor;
 using System.IO;
 using System.Linq;
 using Valve.VR.InteractionSystem;
+using Valve.VR;
 
 class Dojagi
 {
@@ -24,6 +25,8 @@ public class ExhibitionTable : MonoBehaviour
     // - 조형물의 위치 이동 기능
     //
 
+    public SteamVR_Action_Vector2 touchpadControl;
+    public float moveSpeed = 2.0f;
     public GameObject Click;
 
     private string dojagiPath = "Assets/SavedPottery/";
@@ -56,26 +59,26 @@ public class ExhibitionTable : MonoBehaviour
             DeleteDojagi(Click);
         }
 
-        Vector3 MoveArrow = Vector3.zero;
-        if (Input.GetKey(KeyCode.W))
+        // 플레이어 이동
+        Vector2 t = touchpadControl.GetAxis(SteamVR_Input_Sources.Any);
+        if (t != Vector2.zero)
         {
-            MoveArrow += Vector3.forward;
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            MoveArrow += Vector3.back;
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            MoveArrow += Vector3.left;
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            MoveArrow += Vector3.right;
-        }
+            Vector3 dir = Camera.main.transform.localRotation * Vector3.forward;
+            //카메라가 바라보는 방향으로 팩맨도 바라보게 합니다.
+            //팩맨의 Rotation.x값을 freeze해놓았지만 움직여서 따로 Rotation값을 0으로 세팅해주었습니다.
+            transform.localRotation = new Quaternion(0, transform.localRotation.y, 0, transform.localRotation.w);
 
-        MoveArrow = MoveArrow.normalized * Time.deltaTime;
-        player.transform.position += MoveArrow;
+            if (t.y >= 0)
+            {
+                //바라보는 시점 방향으로 이동합니다.
+                player.transform.position += dir * moveSpeed * Time.deltaTime;
+            }
+            else
+            {
+                player.transform.position += -dir * moveSpeed * Time.deltaTime;
+
+            }
+        }
     }
 
     // Private Func
