@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds: []
-  EffectVolume: 0
+  EffectVolume: 100
 --- !u!4 &790675709
 Transform:
   m_ObjectHideFlags: 0
