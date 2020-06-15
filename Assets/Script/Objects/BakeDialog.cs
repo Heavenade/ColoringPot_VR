@@ -31,10 +31,10 @@ public class BakeDialog : MonoBehaviour
         {
             tick = curTick;
 
+            //BakeDialog 출력 - 오른손 입력
             bool touchPadValue = touchPadAction.GetState(SteamVR_Input_Sources.RightHand);
             if (touchPadValue)
-            {
-                Debug.Log("RIGHT");
+            {  
                 if (this.transform.localScale.Equals(new Vector3(0, 0, 0)))
                 {
                     showMenu();
@@ -49,12 +49,15 @@ public class BakeDialog : MonoBehaviour
 
     private void PointerClick(object sender, PointerEventArgs e)
     {
-        if (e.target.name == "BakeButton")
+        if (e.target.name == "BakeYesBtn")
         {
+            //도자기
             GameManager.instance.potteryMesh = pottery.mesh;
+
+            //ColoringScene으로 이동
             SceneManager.LoadScene(sceneName: "ColoringScene");
         }
-        else if (e.target.name == "ResumeButton")
+        else if (e.target.name == "BakeNoBtn")
         {
             hideMenu();
         }
@@ -63,7 +66,7 @@ public class BakeDialog : MonoBehaviour
     private void showMenu()
     {
         // 메뉴 활성화
-        this.transform.localScale = new Vector3(.7f, .7f, .7f);
+        this.transform.localScale = new Vector3(1.0f,1.0f, 1.0f);
         // 컨트롤러 모델 활성화
         leftPointer.gameObject.SetActive(true);
         rightPointer.gameObject.SetActive(true);
