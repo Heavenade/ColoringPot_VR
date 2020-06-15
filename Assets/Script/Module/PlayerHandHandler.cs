@@ -37,13 +37,13 @@ public class PlayerHandHandler : MonoBehaviour
         // }
         if (e.target.tag == "Interactor")
         {
-            Debug.Log("I CAN FLY");
+            Debug.Log("Interactor: " + e.target.name);
+            
         }
     }
 
     public void PointerInside(object sender, PointerEventArgs e)
     {
-        Debug.Log("pointer entered:  " + e.target.name);
     }
 
     public void PointerOutside(object sender, PointerEventArgs e)
