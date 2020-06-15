@@ -145,6 +145,8 @@ public class ExhibitionTable : MonoBehaviour
                     target.transform.parent = tables.transform.GetChild(dt.location);
                     target.transform.localPosition = Vector3.zero;
                     target.transform.localScale = Vector3.one;
+                    target.tag = "Interactor";
+                    target.AddComponent<MeshCollider>();
                 }
 
             }
