@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using Valve.VR.InteractionSystem;
 using Valve.VR;
+using UnityEngine.Rendering;
 
 class Dojagi
 {
@@ -27,8 +28,8 @@ public class ExhibitionTable : MonoBehaviour
 
     public SteamVR_Action_Vector2 touchpadControl;
     public float moveSpeed = 2.0f;
-    public GameObject Click;
 
+    public GameObject cube;
     private string dojagiPath = "Assets/SavedPottery/";
     private string savePath = "Assets/SaveGallery/";
 
@@ -54,11 +55,6 @@ public class ExhibitionTable : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            DeleteDojagi(Click);
-        }
-
         // 플레이어 이동
         Vector2 t = touchpadControl.GetAxis(SteamVR_Input_Sources.Any);
         if (t != Vector2.zero)
@@ -142,19 +138,35 @@ public class ExhibitionTable : MonoBehaviour
                 {
                     if (dt.location == -1) continue;
 
+                    Destroy(tables.transform.GetChild(dt.location).GetChild(0).gameObject);
+                    
                     target.transform.parent = tables.transform.GetChild(dt.location);
                     target.transform.localPosition = Vector3.zero;
                     target.transform.localScale = Vector3.one;
                     target.tag = "Interactor";
                     target.AddComponent<MeshCollider>();
+                    break;
                 }
 
+            }
+
+        }
+        foreach (Transform table in tables.transform)
+        {
+            if (table.childCount == 0)
+            {
+                Instantiate(cube, table);
             }
         }
     }
 
-    private void DeleteDojagi( GameObject target )
+    public void DeleteDojagi( GameObject target )
     {
+        // 선택한 도자기 오브젝트를 삭제하는 스크립트
+
+        // cube는 삭제하지 않는다.
+        if (target == cube) return;
+
         // 인자는 raycast 등으로 선택한 도자기 오브젝트
         int index = -1;
         for (int i = 0; i < dojagiInfos.Count; i++)
@@ -177,6 +189,17 @@ public class ExhibitionTable : MonoBehaviour
         System.IO.File.Delete(dojagiPath + dojagiInfos[index].fileName + ".prefab.meta");
 
         dojagiInfos.RemoveAt(index);
+    }
+
+    public void ChangeLocation( GameObject targetA, GameObject targetB)
+    {
+        Transform aParent = targetA.transform.parent;
+        Transform bParent = targetB.transform.parent;
+
+        targetB.transform.SetParent(aParent);
+        targetA.transform.SetParent(bParent);
+        targetA.transform.localPosition = Vector3.zero;
+        targetB.transform.localPosition = Vector3.zero;
     }
 
 }
