@@ -41,7 +41,7 @@ public class PotteryColoring : MonoBehaviour
         DrawMesh();
         if (Input.GetKeyDown("f"))
         {
-            SavePotteryEx();
+            SavePottery();
         }
     }
 
@@ -120,20 +120,29 @@ public class PotteryColoring : MonoBehaviour
     {
         bool isSaved = false;
         string savingPotteryPath;
-        string sourcePotteryPath = "Assets/SavedPottery/workingPottery.asset";
+        string savingMeshPath;
+        //string sourcePotteryPath = "Assets/SavedPottery/workingPottery.asset";
 
         //max number of storable pottery
         int maxStorablePotteryNum = 3;
 
         for (int i = 1; i <= maxStorablePotteryNum; i++)
         {
-            savingPotteryPath = "Assets/SavedPottery/pottery" + i + ".asset";
+            savingPotteryPath = "Assets/SavedPottery/pottery" + i + ".prefab";
+            savingMeshPath = "Assets/SavedPottery/pottery" + i + ".asset";
 
             FileInfo isPotteryFile = new FileInfo(savingPotteryPath);
-            if (isPotteryFile.Exists == false)
+            FileInfo isMeshFile = new FileInfo(savingMeshPath);
+            if (isPotteryFile.Exists == false && isMeshFile.Exists == false)
+                if (isPotteryFile.Exists == false)
             {
-                //파일저장
-                AssetDatabase.CopyAsset(sourcePotteryPath, savingPotteryPath);
+                //Prefab파일저장
+                PrefabUtility.SaveAsPrefabAsset(this.gameObject, savingPotteryPath);
+                //Asset파일저장
+                Mesh tempMesh = (Mesh)UnityEngine.Object.Instantiate(this.GetComponent<MeshFilter>().mesh);
+                AssetDatabase.CreateAsset(tempMesh, AssetDatabase.GenerateUniqueAssetPath(savingMeshPath));
+                AssetDatabase.SaveAssets();
+                AssetDatabase.Refresh();
                 isSaved = true;
                 return isSaved;
             }

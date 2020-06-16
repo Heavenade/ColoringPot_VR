@@ -102,10 +102,15 @@ public class ExhibitionTable : MonoBehaviour
         for (int i = 0; i < fi.Count; i++)
         {
             if (fi[i].Name.Contains(".meta")) continue;
-
-            GameObject a = AssetDatabase.LoadAssetAtPath<GameObject>(dojagiPath + fi[i].Name);
-            a.transform.localPosition = Vector3.zero;
-            dojagiPrefabs.Add(a);
+            else if (fi[i].Name.EndsWith(".prefab"))
+            {
+                string fileName = fi[i].Name.Replace(".prefab", "");
+                GameObject a = AssetDatabase.LoadAssetAtPath<GameObject>(dojagiPath + fileName + ".prefab");
+                Mesh b = AssetDatabase.LoadAssetAtPath<Mesh>(dojagiPath + fileName + ".asset");
+                a.transform.localPosition = Vector3.zero;
+                a.GetComponent<MeshFilter>().mesh = b;
+                dojagiPrefabs.Add(a);
+            }
         }
 
         // 세이브 파일 불러오기

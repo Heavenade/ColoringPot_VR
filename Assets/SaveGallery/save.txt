@@ -1,4 +1,2 @@
-A,1
-B,3
-C,4
-D,7
+pottery1,1
+pottery2,3
