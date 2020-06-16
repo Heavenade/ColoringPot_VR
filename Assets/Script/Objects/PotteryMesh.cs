@@ -105,7 +105,7 @@ public class PotteryMesh : MonoBehaviour
                 int floor = (int)(y * (1 / eachHeight));
 
                 // debug
-                debugPointers[i].position = new Vector3(handPosition.x, handPosition.y, handPosition.z);
+                //debugPointers[i].position = new Vector3(handPosition.x, handPosition.y, handPosition.z);
 
                 if (floor < 0 || floor > verticesFloorNum || (float)Math.Sqrt(x * x + z * z) <= defaultRadius * 0.6)
                 {
