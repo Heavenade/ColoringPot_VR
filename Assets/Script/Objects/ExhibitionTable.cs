@@ -30,6 +30,7 @@ public class ExhibitionTable : MonoBehaviour
     public float moveSpeed = 2.0f;
 
     public GameObject cube;
+
     private string dojagiPath = "Assets/SavedPottery/";
     private string savePath = "Assets/SaveGallery/";
 

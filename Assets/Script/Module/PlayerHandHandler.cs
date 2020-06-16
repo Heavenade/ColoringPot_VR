@@ -8,6 +8,9 @@ using UnityEngine.SceneManagement;
 
 public class PlayerHandHandler : MonoBehaviour
 {
+    public GameObject UI;
+    public GameObject arrow;
+
     public GameObject curClick;
     public GameObject beforeClick;
 
@@ -95,8 +98,18 @@ public class PlayerHandHandler : MonoBehaviour
                 Debug.Log("Do Exit");
                 SceneManager.LoadScene(sceneName: "StartScene");
             }
+        }
 
-
+        // 클릭한 물체
+        if (curClick != null && (curClick.tag == "Interactor" || curClick.tag == "UI") )
+        {
+            arrow.transform.parent = curClick.transform;
+            arrow.transform.localPosition = Vector3.zero;
+        }
+        else
+        {
+            arrow.transform.parent = UI.transform;
+            arrow.transform.localPosition = Vector3.zero;
         }
     }
 

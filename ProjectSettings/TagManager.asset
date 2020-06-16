@@ -8,6 +8,7 @@ TagManager:
   - FxTemporaire
   - BrushPointer
   - Interactor
+  - UI
   layers:
   - Default
   - TransparentFX
