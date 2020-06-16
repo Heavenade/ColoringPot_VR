@@ -21,13 +21,12 @@ public class SaveDialog : MonoBehaviour
     {
         if (instance == null)
         {
-            //DontDestroyOnLoad(this.gameObject);
             instance = this;
         }
-        //else
-        //{
-        //    Destroy(this.gameObject);
-        //}
+        else
+        {
+            Destroy(this.gameObject);
+        }
     }
     #endregion Singleton
 

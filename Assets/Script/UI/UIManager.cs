@@ -27,6 +27,7 @@ public class UIManager : MonoBehaviour
         isUIopen = false;
         isMolding = false;
         isColoring = false;
+
     }
     #endregion Singleton
 

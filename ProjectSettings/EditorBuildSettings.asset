@@ -5,10 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/StartScene.unity
     guid: 24975504bbcee2d429082eba1ce2f621
   - enabled: 1
     path: Assets/Scenes/PotteryMoldingScene.unity
     guid: ebebbbddeabc34948b4912c3acaa27d2
+  - enabled: 1
+    path: Assets/Scenes/ColoringScene.unity
+    guid: 1f1b9f40f6c86dd4eb4979ac745f508e
+  - enabled: 1
+    path: Assets/Scenes/GalleryScene.unity
+    guid: 63d6f5d71c9a0e74e942b82d9c5d19b6
   m_configObjects: {}

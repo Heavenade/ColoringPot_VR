@@ -49,6 +49,8 @@ public class BakeDialog : MonoBehaviour
     {
         if (e.target.name == "BakeYesBtn")
         {
+            hideMenu();
+
             //도자기
             GameManager.instance.potteryMesh = pottery.mesh;
 

@@ -39,6 +39,9 @@ public class SceneControl : MonoBehaviour
 
         //컬러링으로 이동
         SceneManager.LoadScene(sceneName: "ColoringScene");
+
+        Transform player = GameObject.Find("Player").transform;
+
     }
 
     public void ToGallery()
