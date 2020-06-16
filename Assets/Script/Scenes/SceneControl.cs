@@ -33,7 +33,7 @@ public class SceneControl : MonoBehaviour
         
     }
 
-    public void MoldingToColoring()
+    public void ToColoring()
     {
         //페이드
 
@@ -41,15 +41,7 @@ public class SceneControl : MonoBehaviour
         SceneManager.LoadScene(sceneName: "ColoringScene");
     }
 
-    public void ColoringToMolding()
-    {
-        //페이드
-        
-        //몰딩으로 이동
-        SceneManager.LoadScene(sceneName: "PotteryMoldingScene");
-    }
-
-    public void MoldingToGallery()
+    public void ToGallery()
     {
         //페이드
         
@@ -57,13 +49,6 @@ public class SceneControl : MonoBehaviour
         SceneManager.LoadScene(sceneName: "GalleryScene");
     }
 
-    public void GallerytoMolding()
-    {
-        //페이드
-
-        //몰딩으로 이동
-        SceneManager.LoadScene(sceneName: "PotteryMoldingScene");
-    }
 
     public void ToMolding()
     {

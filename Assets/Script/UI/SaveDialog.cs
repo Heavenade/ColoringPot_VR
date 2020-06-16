@@ -35,6 +35,7 @@ public class SaveDialog : MonoBehaviour
     {
         this.transform.localScale = new Vector3(0, 0, 0);
         SavedPanel.transform.localScale = new Vector3(0, 0, 0);
+
         tick = System.Environment.TickCount;
 
         leftPointer.PointerClick += PointerClick;
@@ -43,25 +44,6 @@ public class SaveDialog : MonoBehaviour
 
     void Update()
     {
-        int curTick = System.Environment.TickCount;
-        if (curTick - tick >= 200)
-        {
-            tick = curTick;
-
-            //왼손입력 - Save는 수정해야함
-            bool touchPadValue = touchPadAction.GetState(SteamVR_Input_Sources.LeftHand);
-            if (touchPadValue)
-            {
-                if (this.transform.localScale.Equals(new Vector3(0, 0, 0)))
-                {
-                    showMenu();
-                }
-                else
-                {
-                    hideMenu();
-                }
-            }
-        }
     }
 
     private void PointerClick(object sender, PointerEventArgs e)
@@ -75,10 +57,10 @@ public class SaveDialog : MonoBehaviour
             //from규리 : 도자기 저장 코드 연결 부탁합니다.
 
             //도자기 저장 알림창 켜기
-            SavedPanel.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+            
 
             //3초후~알림끄고 이동
-            Invoke("ToMolding", 3f);
+            Invoke("SaveAndToMolding", 3f);
             
         }
         else if (e.target.name == "SaveNoBtn")
@@ -87,21 +69,22 @@ public class SaveDialog : MonoBehaviour
             hideMenu();
 
             //PotteryMoldingScene으로 이동
-            SceneControl.instance.ColoringToMolding();
+            SceneControl.instance.ToMolding();
         }
     }
 
-    public void ToMolding()
+    public void SaveAndToMolding()
     {
         //도자기 저장 알림창 끄기
-        SavedPanel.transform.localScale = new Vector3(0, 0, 0);
+        hideSavedPanel();
         //PotteryMoldingScene으로 이동
-        SceneControl.instance.ColoringToMolding();
+        SceneControl.instance.ToMolding();
     }
 
     public void showMenu()
     {
         // 메뉴 활성화
+        UIManager.instance.isUIopen = true;
         this.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
         // 컨트롤러 모델 활성화
         leftPointer.gameObject.SetActive(true);
@@ -111,9 +94,22 @@ public class SaveDialog : MonoBehaviour
     private void hideMenu()
     {
         // 메뉴 비활성화
+        UIManager.instance.isUIopen = false;
         this.transform.localScale = new Vector3(0, 0, 0);
         // 컨트롤러 모델 비활성화
         leftPointer.gameObject.SetActive(false);
         rightPointer.gameObject.SetActive(false);
+    }
+
+    private void showSavedPanel()
+    {
+        UIManager.instance.isUIopen = true;
+        SavedPanel.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+    }
+
+    private void hideSavedPanel()
+    {
+        UIManager.instance.isUIopen = false;
+        SavedPanel.transform.localScale = new Vector3(0f, 0f, 0f);
     }
 }

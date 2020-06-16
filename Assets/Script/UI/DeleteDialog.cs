@@ -28,19 +28,19 @@ public class DeleteDialog : MonoBehaviour
         {
             tick = curTick;
 
-            //Delete Dialog 출력 - 왼손 입력
-            bool touchPadValue = touchPadAction.GetState(SteamVR_Input_Sources.LeftHand);
-            if (touchPadValue)
-            {
-                if (this.transform.localScale.Equals(new Vector3(0, 0, 0)))
-                {
-                    showMenu();
-                }
-                else
-                {
-                    hideMenu();
-                }
-            }
+            //Delete Dialog 출력 - 오른손 입력- 어케할까 고민중
+            //bool touchPadValue = touchPadAction.GetState(SteamVR_Input_Sources.RightHand);
+            //if (touchPadValue)
+            //{
+            //    if (this.transform.localScale.Equals(new Vector3(0, 0, 0)))
+            //    {
+            //        showMenu();
+            //    }
+            //    else
+            //    {
+            //        hideMenu();
+            //    }
+            //}
         }
     }
 
@@ -64,6 +64,7 @@ public class DeleteDialog : MonoBehaviour
     private void showMenu()
     {
         // 메뉴 활성화
+        UIManager.instance.isUIopen = true;
         this.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
         // 컨트롤러 모델 활성화
         leftPointer.gameObject.SetActive(true);
@@ -73,6 +74,7 @@ public class DeleteDialog : MonoBehaviour
     private void hideMenu()
     {
         // 메뉴 비활성화
+        UIManager.instance.isUIopen = false;
         this.transform.localScale = new Vector3(0, 0, 0);
         // 컨트롤러 모델 비활성화
         leftPointer.gameObject.SetActive(false);

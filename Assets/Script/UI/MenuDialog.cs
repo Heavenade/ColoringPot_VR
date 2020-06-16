@@ -36,31 +36,15 @@ public class MenuDialog : MonoBehaviour
 
         leftPointer.PointerClick += PointerClick;
         rightPointer.PointerClick += PointerClick;
+
+        //MenuDialog - 게임시작 시 (해당 씬 실행 시) 자동 출력
+        showMenu();
     }
 
 
     void Update()
     {
-        //메뉴는 게임 시작시 PotteryMoldingScene에서 바로 시작하도록 바꾸기
-        int curTick = System.Environment.TickCount;
-        if (curTick - tick >= 200)
-        {
-            tick = curTick;
-
-            //MenuDialog - 게임시작 시 자동 출력
-            bool touchPadValue = touchPadAction.GetState(SteamVR_Input_Sources.RightHand);
-            if (touchPadValue)
-            {
-                if (this.transform.localScale.Equals(new Vector3(0, 0, 0)))
-                {
-                    showMenu();
-                }
-                else
-                {
-                    hideMenu();
-                }
-            }
-        }
+ 
     }
 
     private void PointerClick(object sender, PointerEventArgs e)
@@ -70,15 +54,14 @@ public class MenuDialog : MonoBehaviour
             //MenuDialog 숨기고
              hideMenu();
 
-            //게임 시작
+            //게임 시작 - 그냥 UI가 열렸는지로 확인해도 될 거 같은데
+            //UIManager.instance.isMolding = true;
 
         }
         else if (e.target.name == "ToGalleryBtn")
         {
             //MenuDialog 숨기고
-            hideMenu();
-
-            
+            hideMenu();        
         }
         else if (e.target.name == "QuitGameBtn")
         {
@@ -92,7 +75,8 @@ public class MenuDialog : MonoBehaviour
 
     public void showMenu()
     {
-        this.transform.localScale = new Vector3(.7f, .7f, .7f);
+        UIManager.instance.isUIopen = true;
+        this.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
         // 컨트롤러 모델 활성화
         leftPointer.gameObject.SetActive(true);
         rightPointer.gameObject.SetActive(true);
@@ -101,6 +85,7 @@ public class MenuDialog : MonoBehaviour
     private void hideMenu()
     {
         // 메뉴 비활성화
+        UIManager.instance.isUIopen = false;
         this.transform.localScale = new Vector3(0, 0, 0);
         // 컨트롤러 모델 비활성화
         leftPointer.gameObject.SetActive(false);

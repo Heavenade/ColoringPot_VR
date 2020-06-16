@@ -30,9 +30,9 @@ public class QuitDialog : MonoBehaviour
         {
             tick = curTick;
 
-            //QuitDialog 출력 - 왼손 입력
+            //QuitDialog 출력 - MoldingScene/ ColoringScene / GalleryScene에서 왼손 입력
             bool touchPadValue = touchPadAction.GetState(SteamVR_Input_Sources.LeftHand);
-            if (touchPadValue)
+            if (touchPadValue && UIManager.instance.isUIopen == false)
             {
                 if (this.transform.localScale.Equals(new Vector3(0, 0, 0)))
                 {
@@ -51,6 +51,9 @@ public class QuitDialog : MonoBehaviour
         if (e.target.name == "QuitYesBtn")
         {
             //씬 변동 없이 하던 작업 중단
+
+            //QuitDialog 숨기기
+            hideMenu();
             //MenuDialog 실행
             MenuDialog.instance.showMenu();
         }
@@ -63,6 +66,7 @@ public class QuitDialog : MonoBehaviour
     private void showMenu()
     {
         // 메뉴 활성화
+        UIManager.instance.isUIopen = true;
         this.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
         // 컨트롤러 모델 활성화
         leftPointer.gameObject.SetActive(true);
@@ -72,6 +76,7 @@ public class QuitDialog : MonoBehaviour
     private void hideMenu()
     {
         // 메뉴 비활성화
+        UIManager.instance.isUIopen = false;
         this.transform.localScale = new Vector3(0, 0, 0);
         // 컨트롤러 모델 비활성화
         leftPointer.gameObject.SetActive(false);
