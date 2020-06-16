@@ -26,51 +26,25 @@ public class PlayerHandHandler : MonoBehaviour
         rightPointer.PointerIn += PointerInside;
         rightPointer.PointerOut += PointerOutside;
         rightPointer.PointerClick += PointerClick;
+
+        table = GameObject.Find("MainScript").GetComponent<ExhibitionTable>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            Debug.Log("Input G");
+            DoInteract();
+        }
     }
 
     public void PointerClick(object sender, PointerEventArgs e)
     {
         beforeClick = curClick;
         curClick = e.target.gameObject;
-
-        if (beforeClick != null && curClick != null)
-        {
-            // 도자기 삭제
-            if (curClick.tag == "Interactor" && beforeClick.name == "delete")
-            {
-                table.DeleteDojagi(curClick);
-            }
-
-            // 도자기 위치 변경
-            if (curClick.tag == "Interactor" && beforeClick.tag == "Interactor")
-            {
-                table.ChangeLocation(beforeClick, curClick);
-            }
-
-        }
-        else if (curClick != null)
-        {
-            // 갤러리 퇴장
-            if (curClick.name == "exit")
-            {
-                SceneManager.LoadScene(sceneName: "StartScene");
-            }
-
-            
-        } else if (beforeClick != null)
-        {
-            // 삭제 취소 ( 아무곳이나 클릭 )
-            if (beforeClick.name == "delete")
-            {
-                beforeClick = null;
-            }
-        }
+        DoInteract();
 
     }
 
@@ -81,5 +55,54 @@ public class PlayerHandHandler : MonoBehaviour
     public void PointerOutside(object sender, PointerEventArgs e)
     {
         Debug.Log("pointer exited: " + e.target.name);
+    }
+
+    public void DoInteract()
+    {
+        Debug.Log("Call DoInteract");
+
+        if (beforeClick != null && curClick != null)
+        {
+            // 도자기 삭제
+            if (curClick.tag == "Interactor" && beforeClick.name == "delete")
+            {
+                Debug.Log("Do Delete");
+                table.DeleteDojagi(curClick);
+                ClearClickObject();
+            }
+
+            // 도자기 위치 변경
+            if (curClick.tag == "Interactor" && beforeClick.tag == "Interactor")
+            {
+                Debug.Log("Do Locate");
+                table.ChangeLocation(beforeClick, curClick);
+                ClearClickObject();
+            }
+
+            // 갤러리 퇴장
+            if (curClick.name == "exit")
+            {
+                Debug.Log("Do Exit");
+                SceneManager.LoadScene(sceneName: "StartScene");
+            }
+
+        }
+        else if (curClick != null)
+        {
+            // 갤러리 퇴장
+            if (curClick.name == "exit")
+            {
+                Debug.Log("Do Exit");
+                SceneManager.LoadScene(sceneName: "StartScene");
+            }
+
+
+        }
+    }
+
+    private void ClearClickObject()
+    {
+        curClick = null;
+        beforeClick = null;
     }
 }

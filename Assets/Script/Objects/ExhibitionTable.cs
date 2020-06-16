@@ -70,7 +70,6 @@ public class ExhibitionTable : MonoBehaviour
             else
             {
                 player.transform.position += -dirt * moveSpeed * Time.deltaTime;
-
             }
         }
     }
@@ -163,6 +162,7 @@ public class ExhibitionTable : MonoBehaviour
     public void DeleteDojagi( GameObject target )
     {
         // 선택한 도자기 오브젝트를 삭제하는 스크립트
+        Debug.Log("Call DeleteDojagi");
 
         // cube는 삭제하지 않는다.
         if (target == cube) return;
@@ -188,11 +188,14 @@ public class ExhibitionTable : MonoBehaviour
         System.IO.File.Delete(dojagiPath + dojagiInfos[index].fileName + ".prefab");
         System.IO.File.Delete(dojagiPath + dojagiInfos[index].fileName + ".prefab.meta");
 
+        Instantiate(cube, tables.transform.GetChild(dojagiInfos[index].location));
         dojagiInfos.RemoveAt(index);
     }
 
     public void ChangeLocation( GameObject targetA, GameObject targetB)
     {
+        Debug.Log("Call ChangeLocation");
+
         Transform aParent = targetA.transform.parent;
         Transform bParent = targetB.transform.parent;
 

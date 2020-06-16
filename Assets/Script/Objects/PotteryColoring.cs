@@ -16,9 +16,16 @@ public class PotteryColoring : MonoBehaviour
     public Transform brush;
     public int colorNum = 1;
 
+    private bool isGallery;
+
     // Start is called before the first frame update
     void Start()
     {
+        if (GameObject.Find("MainScript") && GameObject.Find("MainScript").GetComponent<ExhibitionTable>() != null)
+        {
+            isGallery = true;
+        }
+
         //call mesh
         if (GameManager.instance.potteryMesh == null)
         {
@@ -31,14 +38,18 @@ public class PotteryColoring : MonoBehaviour
         brushVertices = brush.GetComponent<MeshFilter>().mesh.vertices;
         InitializeMeshColor();
         DrawMesh();
-        
+       
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        Coloring(brush, brushVertices, colorNum);
-        DrawMesh();
+        if (isGallery == false)
+        {
+            Coloring(brush, brushVertices, colorNum);
+            DrawMesh();
+        }
     }
 
     void DrawMesh()
