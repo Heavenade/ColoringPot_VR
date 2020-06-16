@@ -14,7 +14,7 @@ public class BillBoard : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        this.transform.position = cam.transform.position;
+        //this.transform.position = cam.transform.position;
         transform.LookAt(Camera.main.transform);
     }
 }

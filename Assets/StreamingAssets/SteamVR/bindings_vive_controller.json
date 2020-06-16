@@ -1,7 +1,7 @@
 {
    "action_manifest_version" : 0,
    "alias_info" : {},
-   "app_key" : "application.generated.unity.newunityproject.exe",
+   "app_key" : "application.generated.unity.coloringpot_vr.exe",
    "bindings" : {
       "/actions/buggy" : {
          "sources" : [
@@ -193,6 +193,9 @@
             },
             {
                "inputs" : {
+                  "click" : {
+                     "output" : "/actions/default/in/touchpadclick"
+                  },
                   "position" : {
                      "output" : "/actions/default/in/touchpadcontrol"
                   }
@@ -202,6 +205,9 @@
             },
             {
                "inputs" : {
+                  "click" : {
+                     "output" : "/actions/default/in/touchpadclick"
+                  },
                   "position" : {
                      "output" : "/actions/default/in/touchpadcontrol"
                   }
