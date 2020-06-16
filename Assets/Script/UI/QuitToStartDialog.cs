@@ -53,7 +53,7 @@ public class QuitToStartDialog : MonoBehaviour
             hideMenu();
 
             //PotteryMoldingScene으로 이동
-            SceneManager.LoadScene(sceneName: "PotteryMoldingScene");
+            SceneControl.instance.ToMolding();
         }
         else if (e.target.name == "QuitNoBtn")
         {

@@ -19,6 +19,8 @@ public class BGMManager : MonoBehaviour
     /*씬 이름들*/
     public const string titlescene = "Title_Tmp";//이런 형식들
 
+
+    #region Singleton
     private void Awake()
     {
         if (instance != null)
@@ -32,6 +34,7 @@ public class BGMManager : MonoBehaviour
         }
         source = this.GetComponent<AudioSource>();
     }
+    #endregion Singleton
 
     void Start()
     {
@@ -58,10 +61,9 @@ public class BGMManager : MonoBehaviour
 
         /*BGM 변경 시*/
         if (preBGMnowPlaying != nextBGMnowPlaying)
-        {
-            BGMnowplaying = nextBGMnowPlaying;
+        {   
             FadeOutBGM();
-            //StopBGM();
+            BGMnowplaying = nextBGMnowPlaying;
             PlayBGM(BGMnowplaying);
             FadeInBGM();
         }

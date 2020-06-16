@@ -65,6 +65,13 @@ public class SceneControl : MonoBehaviour
         SceneManager.LoadScene(sceneName: "PotteryMoldingScene");
     }
 
+    public void ToMolding()
+    {
+        //페이드
+
+        //몰딩으로 이동
+        SceneManager.LoadScene(sceneName: "PotteryMoldingScene");
+    }
 
 
 }
