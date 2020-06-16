@@ -26,19 +26,27 @@ public class PotteryColoring : MonoBehaviour
             isGallery = true;
         }
 
-        //call mesh
-        if (GameManager.instance.potteryMesh == null)
+        if (isGallery == false)
         {
-            potteryMesh = (Mesh)AssetDatabase.LoadAssetAtPath("Assets/Resources/Prefab/SamplePottery.asset", typeof(Mesh));
+            //call mesh
+            if (GameManager.instance.potteryMesh == null)
+            {
+                potteryMesh = (Mesh)AssetDatabase.LoadAssetAtPath("Assets/Resources/Prefab/SamplePottery.asset", typeof(Mesh));
+            }
+            else
+            {
+                potteryMesh = GameManager.instance.potteryMesh;
+            }
+
+      
+            if (brush)
+            {
+                brushVertices = brush.GetComponent<MeshFilter>().mesh.vertices;
+            }
+
+            InitializeMeshColor();
+            DrawMesh();
         }
-        else
-        {
-            potteryMesh = GameManager.instance.potteryMesh;
-        }
-        brushVertices = brush.GetComponent<MeshFilter>().mesh.vertices;
-        InitializeMeshColor();
-        DrawMesh();
-       
 
     }
 
@@ -130,7 +138,7 @@ public class PotteryColoring : MonoBehaviour
         string sourcePotteryPath = "Assets/SavedPottery/workingPottery.asset";
         
         //max number of storable pottery
-        int maxStorablePotteryNum = 3;
+        int maxStorablePotteryNum = 150;
 
         for(int i = 1; i <= maxStorablePotteryNum; i++)
         {
