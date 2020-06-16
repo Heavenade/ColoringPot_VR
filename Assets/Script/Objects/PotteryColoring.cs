@@ -16,32 +16,44 @@ public class PotteryColoring : MonoBehaviour
     public Transform brush;
     public int colorNum = 1;
 
+    private bool isGalleryScene;
+
     // Start is called before the first frame update
     void Start()
     {
-        //call mesh
-        if (GameManager.instance.potteryMesh == null)
+        if (GameObject.Find("MainScript") != null && GameObject.Find("MainScript").GetComponent<ExhibitionTable>() != null)
         {
-            potteryMesh = (Mesh)AssetDatabase.LoadAssetAtPath("Assets/Resources/Prefab/SamplePottery.asset", typeof(Mesh));
+            isGalleryScene = true;
         }
-        else
-        {
-            potteryMesh = GameManager.instance.potteryMesh;
-        }
-        brushVertices = brush.GetComponent<MeshFilter>().mesh.vertices;
-        InitializeMeshColor();
-        DrawMesh();
 
+        //call mesh
+        if (isGalleryScene == false)
+        {
+            if (GameManager.instance.potteryMesh == null)
+            {
+                potteryMesh = (Mesh)AssetDatabase.LoadAssetAtPath("Assets/Resources/Prefab/SamplePottery.asset", typeof(Mesh));
+            }
+            else
+            {
+                potteryMesh = GameManager.instance.potteryMesh;
+            }
+            brushVertices = brush.GetComponent<MeshFilter>().mesh.vertices;
+            InitializeMeshColor();
+            DrawMesh();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        Coloring(brush, brushVertices, colorNum);
-        DrawMesh();
-        if (Input.GetKeyDown("f"))
+        if (isGalleryScene == false)
         {
-            SavePottery();
+            Coloring(brush, brushVertices, colorNum);
+            DrawMesh();
+            if (Input.GetKeyDown("f"))
+            {
+                SavePottery();
+            }
         }
     }
 
