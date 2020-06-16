@@ -13,7 +13,6 @@ public class BakeDialog : MonoBehaviour
     public SteamVR_Action_Boolean touchPadAction;
     private int tick;
 
-    // Start is called before the first frame update
     void Start()
     {
         this.transform.localScale = new Vector3(0, 0, 0);
@@ -23,7 +22,6 @@ public class BakeDialog : MonoBehaviour
         rightPointer.PointerClick += PointerClick;
     }
 
-    // Update is called once per frame
     void Update()
     {
         int curTick = System.Environment.TickCount;
@@ -55,7 +53,7 @@ public class BakeDialog : MonoBehaviour
             GameManager.instance.potteryMesh = pottery.mesh;
 
             //ColoringScene으로 이동
-            SceneManager.LoadScene(sceneName: "ColoringScene");
+            SceneControl.instance.MoldingToColoring();
         }
         else if (e.target.name == "BakeNoBtn")
         {

@@ -51,7 +51,7 @@ public class DeleteDialog : MonoBehaviour
             //Hide DeleteDialog
             hideMenu();
 
-            //선택한 도자기 삭제
+            //선택한 도자기 삭제 연결
 
         }
         else if (e.target.name == "CompleteNoBtn")

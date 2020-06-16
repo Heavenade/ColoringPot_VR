@@ -50,7 +50,7 @@ public class QuitDialog : MonoBehaviour
     {
         if (e.target.name == "QuitYesBtn")
         {
-            //씬 변동 없이 하던 작업 중단(MenuDialog 참조 가능)
+            //씬 변동 없이 하던 작업 중단
             //MenuDialog 실행
             MenuDialog.instance.showMenu();
         }

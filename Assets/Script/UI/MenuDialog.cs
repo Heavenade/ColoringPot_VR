@@ -78,8 +78,7 @@ public class MenuDialog : MonoBehaviour
             //MenuDialog 숨기고
             hideMenu();
 
-            //갤러리로 이동
-            SceneManager.LoadScene(sceneName: "GalleryScene");
+            
         }
         else if (e.target.name == "QuitGameBtn")
         {

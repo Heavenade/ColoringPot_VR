@@ -52,7 +52,7 @@ public class CompleteDialog : MonoBehaviour
             //Hide CompleteDialog
             hideMenu();
 
-            //씬 변동 없이 하던 작업 중단(SaveDialog 참조 가능)
+            //씬 변동 없이 하던 작업 중단
             //Show SaveDialog
             SaveDialog.instance.showMenu();
         }

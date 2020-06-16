@@ -77,7 +77,7 @@ public class SaveDialog : MonoBehaviour
             //도자기 저장 알림창 켜기
             SavedPanel.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
 
-            //3초후~
+            //3초후~알림끄고 이동
             Invoke("ToMolding", 3f);
             
         }
@@ -85,8 +85,9 @@ public class SaveDialog : MonoBehaviour
         {
             //Hide SaveDialog
             hideMenu();
+
             //PotteryMoldingScene으로 이동
-            SceneManager.LoadScene(sceneName: "PotteryMoldingScene");
+            SceneControl.instance.ColoringToMolding();
         }
     }
 
@@ -95,7 +96,7 @@ public class SaveDialog : MonoBehaviour
         //도자기 저장 알림창 끄기
         SavedPanel.transform.localScale = new Vector3(0, 0, 0);
         //PotteryMoldingScene으로 이동
-        SceneManager.LoadScene(sceneName: "PotteryMoldingScene");
+        SceneControl.instance.ColoringToMolding();
     }
 
     public void showMenu()
