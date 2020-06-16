@@ -194,9 +194,13 @@ public class ExhibitionTable : MonoBehaviour
         Destroy(target);
         System.IO.File.Delete(dojagiPath + dojagiInfos[index].fileName + ".prefab");
         System.IO.File.Delete(dojagiPath + dojagiInfos[index].fileName + ".prefab.meta");
+        System.IO.File.Delete(dojagiPath + dojagiInfos[index].fileName + ".asset");
+        System.IO.File.Delete(dojagiPath + dojagiInfos[index].fileName + ".asset.meta");
 
         Instantiate(cube, tables.transform.GetChild(dojagiInfos[index].location));
         dojagiInfos.RemoveAt(index);
+
+        SaveCurDojagiData();
     }
 
     public void ChangeLocation(GameObject targetA, GameObject targetB)
@@ -216,6 +220,31 @@ public class ExhibitionTable : MonoBehaviour
         targetB.transform.localPosition = bLocalPos;
         targetA.transform.localRotation = Quaternion.identity;
         targetB.transform.localRotation = Quaternion.identity;
+
+        SaveCurDojagiData();
+    }
+
+    public void SaveCurDojagiData()
+    {
+        List<string> curTables = new List<string>();
+        for (int i = 0; i< tables.transform.childCount; i++)
+        {
+            Transform oTable = tables.transform.GetChild(i);
+            Transform child = oTable.GetChild(0);
+
+            if (child.name != "Cube")
+            {
+                curTables.Add(child.name + "," + i.ToString());
+            }
+        }
+
+        StreamWriter sw = new StreamWriter(savePath + "save.txt");
+        foreach (string s in curTables)
+        {
+            sw.WriteLine(s);
+        }
+        sw.Close();
+
     }
 
 }

@@ -133,20 +133,21 @@ public class PotteryColoring : MonoBehaviour
         bool isSaved = false;
         string savingPotteryPath;
         string savingMeshPath;
+        string fileName;
         //string sourcePotteryPath = "Assets/SavedPottery/workingPottery.asset";
 
         //max number of storable pottery
-        int maxStorablePotteryNum = 3;
+        int maxStorablePotteryNum = 88;
 
         for (int i = 1; i <= maxStorablePotteryNum; i++)
         {
-            savingPotteryPath = "Assets/SavedPottery/pottery" + i + ".prefab";
-            savingMeshPath = "Assets/SavedPottery/pottery" + i + ".asset";
+            fileName = "pottery" + i.ToString() ;
+            savingPotteryPath = "Assets/SavedPottery/" + fileName + ".prefab";
+            savingMeshPath = "Assets/SavedPottery/" + fileName + ".asset";
 
             FileInfo isPotteryFile = new FileInfo(savingPotteryPath);
             FileInfo isMeshFile = new FileInfo(savingMeshPath);
             if (isPotteryFile.Exists == false && isMeshFile.Exists == false)
-                if (isPotteryFile.Exists == false)
             {
                 //Prefab파일저장
                 PrefabUtility.SaveAsPrefabAsset(this.gameObject, savingPotteryPath);
@@ -155,9 +156,32 @@ public class PotteryColoring : MonoBehaviour
                 AssetDatabase.CreateAsset(tempMesh, AssetDatabase.GenerateUniqueAssetPath(savingMeshPath));
                 AssetDatabase.SaveAssets();
                 AssetDatabase.Refresh();
+
+                // 세이브파일을 읽고 빈 자리를 찾아서 자리를 할당
+                string savePath = "Assets/SaveGallery/";
+                List<int> locations = new List<int>();
+                string[] datas = System.IO.File.ReadAllLines(savePath + "save.txt");
+                for (int j = 0; j < datas.Length; j++)
+                {
+                    string[] data = datas[j].Split(',');
+                    locations.Add(int.Parse(data[1].ToString()));
+                }
+
+                int n = 0;
+                while (locations.Contains(n)) n++;
+                if (n > maxStorablePotteryNum) return isSaved;
+                string s;
+                s = fileName + "," + n.ToString();
+
+                StreamWriter sw = new StreamWriter(savePath + "save.txt", true);
+                sw.WriteLine(s);
+                sw.Close();
+
                 isSaved = true;
                 return isSaved;
+
             }
+
         }
 
         return isSaved;
