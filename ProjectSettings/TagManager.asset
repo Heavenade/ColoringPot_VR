@@ -6,6 +6,8 @@ TagManager:
   tags:
   - projectile
   - FxTemporaire
+  - BrushPointer
+  - Interactor
   layers:
   - Default
   - TransparentFX
