@@ -31,7 +31,7 @@ public class PotteryColoring : MonoBehaviour
         brushVertices = brush.GetComponent<MeshFilter>().mesh.vertices;
         InitializeMeshColor();
         DrawMesh();
-        
+
     }
 
     // Update is called once per frame
@@ -39,6 +39,10 @@ public class PotteryColoring : MonoBehaviour
     {
         Coloring(brush, brushVertices, colorNum);
         DrawMesh();
+        if (Input.GetKeyDown("f"))
+        {
+            SavePotteryEx();
+        }
     }
 
     void DrawMesh()
@@ -55,7 +59,7 @@ public class PotteryColoring : MonoBehaviour
         {
             colors[i] = Color.white;
         }
-        
+
         potteryMesh.colors = colors;
     }
 
@@ -66,22 +70,22 @@ public class PotteryColoring : MonoBehaviour
         Vector3[] potteryVertices = potteryMesh.vertices;
         Color[] colors = potteryMesh.colors;
 
-        for (int i = 0; i < brushVertices.Length ; i++)
+        for (int i = 0; i < brushVertices.Length; i++)
         {
             brushPosition = brush.TransformPoint(brushVertices[i]) - this.GetComponent<Transform>().position;
             float x = brushPosition.x;
             float y = brushPosition.y;
             float z = brushPosition.z;
 
-            for(int j = 0; j < potteryVertices.Length; j++)
+            for (int j = 0; j < potteryVertices.Length; j++)
             {
                 if (potteryVertices[j].x - x <= 0.01f && potteryVertices[j].x - x >= -0.01f && potteryVertices[j].y - y <= 0.01f && potteryVertices[j].y - y >= -0.01f && potteryVertices[j].z - z <= 0.01f && potteryVertices[j].z - z >= -0.01f)
                 {
-                    if(colorNum == 1)
+                    if (colorNum == 1)
                     {
                         colors[j] = Color.red;
                     }
-                    else if(colorNum == 2)
+                    else if (colorNum == 2)
                     {
                         colors[j] = Color.blue;
                     }
@@ -117,16 +121,16 @@ public class PotteryColoring : MonoBehaviour
         bool isSaved = false;
         string savingPotteryPath;
         string sourcePotteryPath = "Assets/SavedPottery/workingPottery.asset";
-        
+
         //max number of storable pottery
         int maxStorablePotteryNum = 3;
 
-        for(int i = 1; i <= maxStorablePotteryNum; i++)
+        for (int i = 1; i <= maxStorablePotteryNum; i++)
         {
             savingPotteryPath = "Assets/SavedPottery/pottery" + i + ".asset";
-           
+
             FileInfo isPotteryFile = new FileInfo(savingPotteryPath);
-            if(isPotteryFile.Exists == false)
+            if (isPotteryFile.Exists == false)
             {
                 //파일저장
                 AssetDatabase.CopyAsset(sourcePotteryPath, savingPotteryPath);
@@ -138,5 +142,9 @@ public class PotteryColoring : MonoBehaviour
         return isSaved;
     }
 
-    
+    public void SavePotteryEx()
+    {
+        string potteryName = "workingPottery";
+        PrefabUtility.SaveAsPrefabAsset(this.gameObject, "Assets/SavedPottery/" + potteryName + ".prefab");
+    }
 }
