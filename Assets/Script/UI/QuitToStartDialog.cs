@@ -31,11 +31,8 @@ public class QuitToStartDialog : MonoBehaviour
             //QuitToStartDialog 출력 - 오른손 입력
             bool touchPadValue = touchPadAction.GetState(SteamVR_Input_Sources.RightHand);
 
-            Debug.Log("아~ 핫도그"+ touchPadValue);
-
             if (touchPadValue)
             {
-                Debug.Log("아~ 핫도그 먹고 싶다.");
                 if (this.transform.localScale.Equals(new Vector3(0, 0, 0)))
                 {
                     showMenu();

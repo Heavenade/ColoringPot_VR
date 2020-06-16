@@ -5,9 +5,11 @@ using UnityEngine.SceneManagement;
 using Valve.VR;
 using Valve.VR.Extras;
 
-public class MenuDialog : MonoBehaviour
+public class SaveDialog : MonoBehaviour
 {
-    public static MenuDialog instance;
+    public static SaveDialog instance;
+
+    public GameObject SavedPanel;
 
     public SteamVR_LaserPointer leftPointer;
     public SteamVR_LaserPointer rightPointer;
@@ -19,36 +21,35 @@ public class MenuDialog : MonoBehaviour
     {
         if (instance == null)
         {
-            DontDestroyOnLoad(this.gameObject);
+            //DontDestroyOnLoad(this.gameObject);
             instance = this;
         }
-        else
-        {
-            Destroy(this.gameObject);
-        }
+        //else
+        //{
+        //    Destroy(this.gameObject);
+        //}
     }
     #endregion Singleton
 
     void Start()
     {
         this.transform.localScale = new Vector3(0, 0, 0);
+        SavedPanel.transform.localScale = new Vector3(0, 0, 0);
         tick = System.Environment.TickCount;
 
         leftPointer.PointerClick += PointerClick;
         rightPointer.PointerClick += PointerClick;
     }
 
-
     void Update()
     {
-        //메뉴는 게임 시작시 PotteryMoldingScene에서 바로 시작하도록 바꾸기
         int curTick = System.Environment.TickCount;
         if (curTick - tick >= 200)
         {
             tick = curTick;
 
-            //MenuDialog - 게임시작 시 자동 출력
-            bool touchPadValue = touchPadAction.GetState(SteamVR_Input_Sources.RightHand);
+            //왼손입력 - Save는 수정해야함
+            bool touchPadValue = touchPadAction.GetState(SteamVR_Input_Sources.LeftHand);
             if (touchPadValue)
             {
                 if (this.transform.localScale.Equals(new Vector3(0, 0, 0)))
@@ -65,32 +66,42 @@ public class MenuDialog : MonoBehaviour
 
     private void PointerClick(object sender, PointerEventArgs e)
     {
-        if (e.target.name == "GameStartBtn")
+        if (e.target.name == "SaveYesBtn")
         {
-            //MenuDialog 숨기고
-             hideMenu();
-            //from규리 : 게임 시작~ 연결해주세요
-        }
-        else if (e.target.name == "ToGalleryBtn")
-        {
-            //MenuDialog 숨기고
-            hideMenu();
-            //갤러리로 이동
-            SceneManager.LoadScene(sceneName: "ColoringScene");
-        }
-        else if (e.target.name == "QuitGameBtn")
-        {
-            //MenuDialog 숨기고
+            //Hide SaveDialog
             hideMenu();
 
-            //게임 종료
-            Application.Quit();                
+            //Save Pottery
+            //from규리 : 도자기 저장 코드 연결 부탁합니다.
+
+            //도자기 저장 알림창 켜기
+            SavedPanel.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+
+            //3초후~
+            Invoke("ToMolding", 3f);
+            
         }
+        else if (e.target.name == "SaveNoBtn")
+        {
+            //Hide SaveDialog
+            hideMenu();
+            //PotteryMoldingScene으로 이동
+            SceneManager.LoadScene(sceneName: "PotteryMoldingScene");
+        }
+    }
+
+    public void ToMolding()
+    {
+        //도자기 저장 알림창 끄기
+        SavedPanel.transform.localScale = new Vector3(0, 0, 0);
+        //PotteryMoldingScene으로 이동
+        SceneManager.LoadScene(sceneName: "PotteryMoldingScene");
     }
 
     public void showMenu()
     {
-        this.transform.localScale = new Vector3(.7f, .7f, .7f);
+        // 메뉴 활성화
+        this.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
         // 컨트롤러 모델 활성화
         leftPointer.gameObject.SetActive(true);
         rightPointer.gameObject.SetActive(true);
