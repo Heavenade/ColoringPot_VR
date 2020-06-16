@@ -12,17 +12,15 @@ public class QuitToStartDialog : MonoBehaviour
     public SteamVR_Action_Boolean touchPadAction;
     private int tick;
 
-    // Start is called before the first frame update
     void Start()
     {
-        this.transform.localScale = new Vector3(0, 0, 0);
+        //this.transform.localScale = new Vector3(0, 0, 0);
         tick = System.Environment.TickCount;
 
         leftPointer.PointerClick += PointerClick;
         rightPointer.PointerClick += PointerClick;
     }
 
-    // Update is called once per frame
     void Update()
     {
         int curTick = System.Environment.TickCount;
