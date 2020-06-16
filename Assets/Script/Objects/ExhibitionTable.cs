@@ -30,6 +30,7 @@ public class ExhibitionTable : MonoBehaviour
     public float moveSpeed = 2.0f;
 
     public GameObject cube;
+
     private string dojagiPath = "Assets/SavedPottery/";
     private string savePath = "Assets/SaveGallery/";
 
@@ -83,7 +84,7 @@ public class ExhibitionTable : MonoBehaviour
             Debug.LogError("ExhibitionTable Path is NULL: " + dojagiPath);
             return;
         }
-        
+
         if (string.IsNullOrEmpty(savePath))
         {
             Debug.LogError("ExhibitionTable Path is NULL: " + savePath);
@@ -115,7 +116,7 @@ public class ExhibitionTable : MonoBehaviour
 
         // 세이브 파일 불러오기
         datas = System.IO.File.ReadAllLines(savePath + "save.txt");
-        for (int i =0; i< datas.Length; i++)
+        for (int i = 0; i < datas.Length; i++)
         {
             string[] data = datas[i].Split(',');
 
@@ -143,10 +144,11 @@ public class ExhibitionTable : MonoBehaviour
                     if (dt.location == -1) continue;
 
                     Destroy(tables.transform.GetChild(dt.location).GetChild(0).gameObject);
-                    
+
                     target.transform.parent = tables.transform.GetChild(dt.location);
                     target.transform.localPosition = Vector3.zero;
                     target.transform.localScale = Vector3.one;
+                    target.transform.localRotation = Quaternion.identity;
                     target.tag = "Interactor";
                     target.AddComponent<MeshCollider>();
                     break;
@@ -164,7 +166,7 @@ public class ExhibitionTable : MonoBehaviour
         }
     }
 
-    public void DeleteDojagi( GameObject target )
+    public void DeleteDojagi(GameObject target)
     {
         // 선택한 도자기 오브젝트를 삭제하는 스크립트
         Debug.Log("Call DeleteDojagi");
@@ -192,22 +194,57 @@ public class ExhibitionTable : MonoBehaviour
         Destroy(target);
         System.IO.File.Delete(dojagiPath + dojagiInfos[index].fileName + ".prefab");
         System.IO.File.Delete(dojagiPath + dojagiInfos[index].fileName + ".prefab.meta");
+        System.IO.File.Delete(dojagiPath + dojagiInfos[index].fileName + ".asset");
+        System.IO.File.Delete(dojagiPath + dojagiInfos[index].fileName + ".asset.meta");
 
         Instantiate(cube, tables.transform.GetChild(dojagiInfos[index].location));
         dojagiInfos.RemoveAt(index);
+
+        SaveCurDojagiData();
     }
 
-    public void ChangeLocation( GameObject targetA, GameObject targetB)
+    public void ChangeLocation(GameObject targetA, GameObject targetB)
     {
+        // 두 Interactor 오브젝트 간 위치를 바꾼다.
         Debug.Log("Call ChangeLocation");
 
         Transform aParent = targetA.transform.parent;
         Transform bParent = targetB.transform.parent;
+        Vector3 aLocalPos = targetA.transform.localPosition;
+        Vector3 bLocalPos = targetB.transform.localPosition;
 
+        //
         targetB.transform.SetParent(aParent);
         targetA.transform.SetParent(bParent);
-        targetA.transform.localPosition = Vector3.zero;
-        targetB.transform.localPosition = Vector3.zero;
+        targetA.transform.localPosition = aLocalPos;
+        targetB.transform.localPosition = bLocalPos;
+        targetA.transform.localRotation = Quaternion.identity;
+        targetB.transform.localRotation = Quaternion.identity;
+
+        SaveCurDojagiData();
+    }
+
+    public void SaveCurDojagiData()
+    {
+        List<string> curTables = new List<string>();
+        for (int i = 0; i< tables.transform.childCount; i++)
+        {
+            Transform oTable = tables.transform.GetChild(i);
+            Transform child = oTable.GetChild(0);
+
+            if (child.name != "Cube")
+            {
+                curTables.Add(child.name + "," + i.ToString());
+            }
+        }
+
+        StreamWriter sw = new StreamWriter(savePath + "save.txt");
+        foreach (string s in curTables)
+        {
+            sw.WriteLine(s);
+        }
+        sw.Close();
+
     }
 
 }

@@ -8,8 +8,13 @@ using UnityEngine.SceneManagement;
 
 public class PlayerHandHandler : MonoBehaviour
 {
+
     public GameObject curClick;
     public GameObject beforeClick;
+
+    [Space]
+    public GameObject UI;
+    public GameObject arrow;
 
     public SteamVR_LaserPointer leftPointer;
     public SteamVR_LaserPointer rightPointer;
@@ -72,7 +77,7 @@ public class PlayerHandHandler : MonoBehaviour
             }
 
             // 도자기 위치 변경
-            if (curClick.tag == "Interactor" && beforeClick.tag == "Interactor")
+            else if (curClick.tag == "Interactor" && beforeClick.tag == "Interactor")
             {
                 Debug.Log("Do Locate");
                 table.ChangeLocation(beforeClick, curClick);
@@ -80,7 +85,7 @@ public class PlayerHandHandler : MonoBehaviour
             }
 
             // 갤러리 퇴장
-            if (curClick.name == "exit")
+            else if (curClick.name == "exit")
             {
                 Debug.Log("Do Exit");
                 SceneManager.LoadScene(sceneName: "StartScene");
@@ -95,8 +100,19 @@ public class PlayerHandHandler : MonoBehaviour
                 Debug.Log("Do Exit");
                 SceneManager.LoadScene(sceneName: "StartScene");
             }
+        }
 
-
+        // 클릭한 물체
+        if (curClick != null && (curClick.tag == "Interactor" || curClick.tag == "UI") )
+        {
+            arrow.transform.parent = curClick.transform;
+            arrow.transform.localPosition = Vector3.zero;
+            arrow.transform.localRotation = Quaternion.identity;
+        }
+        else
+        {
+            arrow.transform.parent = UI.transform;
+            arrow.transform.localPosition = Vector3.zero;
         }
     }
 
