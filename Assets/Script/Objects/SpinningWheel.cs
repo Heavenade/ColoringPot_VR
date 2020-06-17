@@ -34,11 +34,15 @@ public class SpinningWheel : MonoBehaviour
             {
                 rotationAccelation = TERMINAL_SPEED;
             }
+            // 효과음 재생
+            EffectManager.instance.Play("sfx_01");
         }
         else
         {
             rotationAccelation -= ACCELERATION;
             if (rotationAccelation <= 0) rotationAccelation = 0;
+            // 효과음 정지
+            EffectManager.instance.Stop("sfx_01");
         }
 
         //rotationSpeed += rotationAccelation;
