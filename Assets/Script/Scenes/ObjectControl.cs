@@ -14,7 +14,7 @@ public class ObjectControl : MonoBehaviour
 
     void Start()
     {
-        if (SceneManager.GetActiveScene().ToString() == "PotteryMoldingScene")
+        if (SceneManager.GetActiveScene().name == "PotteryMoldingScene")
         {
             brush.transform.localScale = new Vector3(0, 0, 0);
             brushPoint.transform.localScale = new Vector3(0, 0, 0);

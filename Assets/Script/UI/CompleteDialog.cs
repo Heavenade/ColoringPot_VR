@@ -29,7 +29,7 @@ public class CompleteDialog : MonoBehaviour
 
             //CompleteDialog 출력 - ColoringScene에서 오른손 입력 (통일성 위해 임의로 바꿈)
             bool touchPadValue = touchPadAction.GetState(SteamVR_Input_Sources.RightHand);
-            if (touchPadValue)
+            if (touchPadValue && UIManager.instance.isUIopen == false && SceneManager.GetActiveScene().name == "ColoringScene")
             {
                 if (this.transform.localScale.Equals(new Vector3(0, 0, 0)))
                 {

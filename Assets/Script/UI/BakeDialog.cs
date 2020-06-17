@@ -31,7 +31,7 @@ public class BakeDialog : MonoBehaviour
 
             //BakeDialog 출력 - MoldingScene에서 오른손 입력
             bool touchPadValue = touchPadAction.GetState(SteamVR_Input_Sources.RightHand);
-            if (touchPadValue && UIManager.instance.isUIopen == false)
+            if (touchPadValue && UIManager.instance.isUIopen == false && SceneManager.GetActiveScene().name == "PotteryMoldingScene")
             {  
                 if (this.transform.localScale.Equals(new Vector3(0, 0, 0)))
                 {
