@@ -11,22 +11,6 @@ public class ObjectControl : MonoBehaviour
     public GameObject palette;
     public GameObject bakeDialog;
 
-    public static ObjectControl instance;
-
-    #region Singleton
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            DontDestroyOnLoad(this.gameObject);
-            instance = this;
-        }
-        else
-        {
-            Destroy(this.gameObject);
-        }
-    }
-    #endregion Singleton
 
     void Start()
     {
@@ -38,7 +22,7 @@ public class ObjectControl : MonoBehaviour
         }
     }
 
- 
+    // Update is called once per frame
     void Update()
     {
         if (SceneManager.GetActiveScene().name == "ColoringScene")
