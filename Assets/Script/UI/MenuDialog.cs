@@ -55,17 +55,26 @@ public class MenuDialog : MonoBehaviour
 
             //게임 시작 - 그냥 UI가 열렸는지로 확인해도 될 거 같은데
             //UIManager.instance.isMolding = true;
+            
+            // 효과음 재생
+            EffectManager.instance.Play("button6");
 
         }
         else if (e.target.name == "ToGalleryBtn")
         {
             //MenuDialog 숨기고
-            hideMenu();        
+            hideMenu();
+
+            // 효과음 재생
+            EffectManager.instance.Play("button6");
         }
         else if (e.target.name == "QuitGameBtn")
         {
             //MenuDialog 숨기고
             hideMenu();
+
+            // 효과음 재생
+            EffectManager.instance.Play("button6");
 
             //게임 종료
             Application.Quit();                

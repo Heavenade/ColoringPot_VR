@@ -52,11 +52,17 @@ public class CompleteDialog : MonoBehaviour
 
             //Show SaveDialog
             SaveDialog.instance.showMenu();
+
+            // 효과음 재생
+            EffectManager.instance.Play("button6");
         }
         else if (e.target.name == "CompleteNoBtn")
         {
             //Hide CompleteDialog
             hideMenu();
+
+            // 효과음 재생
+            EffectManager.instance.Play("button6");
         }
     }
 
@@ -68,6 +74,8 @@ public class CompleteDialog : MonoBehaviour
         // 컨트롤러 모델 활성화
         leftPointer.gameObject.SetActive(true);
         rightPointer.gameObject.SetActive(true);
+        // 효과음 재생
+        EffectManager.instance.Play("button4");
     }
 
     private void hideMenu()

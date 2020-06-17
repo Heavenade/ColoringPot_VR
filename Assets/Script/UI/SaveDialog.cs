@@ -58,6 +58,9 @@ public class SaveDialog : MonoBehaviour
             //도자기 저장 알림창 켜기
             showSavedPanel();
 
+            // 효과음 재생
+            EffectManager.instance.Play("button6");
+
             //3초후~알림끄고 이동
             Invoke("SaveAndToMolding", 3f);
             
@@ -66,6 +69,9 @@ public class SaveDialog : MonoBehaviour
         {
             //Hide SaveDialog
             hideMenu();
+
+            // 효과음 재생
+            EffectManager.instance.Play("button6");
 
             //PotteryMoldingScene으로 이동
             SceneControl.instance.ToMolding();
@@ -88,6 +94,8 @@ public class SaveDialog : MonoBehaviour
         // 컨트롤러 모델 활성화
         leftPointer.gameObject.SetActive(true);
         rightPointer.gameObject.SetActive(true);
+        // 효과음 재생
+        EffectManager.instance.Play("button4");
     }
 
     private void hideMenu()

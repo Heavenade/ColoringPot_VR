@@ -51,6 +51,9 @@ public class DeleteDialog : MonoBehaviour
             //Hide DeleteDialog
             hideMenu();
 
+            // 효과음 재생
+            EffectManager.instance.Play("button6");
+
             //선택한 도자기 삭제 연결
 
         }
@@ -58,6 +61,9 @@ public class DeleteDialog : MonoBehaviour
         {
             //Hide CompleteDialog
             hideMenu();
+
+            // 효과음 재생
+            EffectManager.instance.Play("button6");
         }
     }
 
@@ -69,6 +75,8 @@ public class DeleteDialog : MonoBehaviour
         // 컨트롤러 모델 활성화
         leftPointer.gameObject.SetActive(true);
         rightPointer.gameObject.SetActive(true);
+        // 효과음 재생
+        EffectManager.instance.Play("button4");
     }
 
     private void hideMenu()
