@@ -53,7 +53,7 @@ public class SaveDialog : MonoBehaviour
             hideMenu();
 
             //Save Pottery
-            //from규리 : 도자기 저장 코드 연결 부탁합니다.
+            GameObject.Find("ColoringPottery").GetComponent<PotteryColoring>().SavePottery();
 
             //도자기 저장 알림창 켜기
             showSavedPanel();

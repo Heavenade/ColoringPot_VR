@@ -1,3 +1,4 @@
-pottery2,3
+pottery3,5
 pottery1,7
-pottery3,0
+pottery2,37
+pottery4,0
