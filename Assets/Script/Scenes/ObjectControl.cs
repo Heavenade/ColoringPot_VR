@@ -9,6 +9,7 @@ public class ObjectControl : MonoBehaviour
     public GameObject brush;
     public GameObject brushPoint;
     public GameObject palette;
+    public GameObject bakeDialog;
 
 
     void Start()
@@ -32,6 +33,7 @@ public class ObjectControl : MonoBehaviour
 
             PotteryColoring pottery = GameObject.Find("ColoringPottery").GetComponent<PotteryColoring>();
             brushPoint.GetComponent<MovingSphere>().pottery = pottery;
+            bakeDialog.GetComponent<BakeDialog>().pottery = pottery.GetComponent<MeshFilter>();
             pottery.brush = brushPoint.transform;
             Palette[] colors = palette.gameObject.GetComponentsInChildren<Palette>();
             foreach (Palette color in colors)
