@@ -12,7 +12,7 @@ public class BGMManager : MonoBehaviour
 
     private WaitForSeconds waitTime = new WaitForSeconds(0.01f);
 
-    private float BGMVolume; //BGM 볼륨
+    public float BGMVolume; //BGM 볼륨
 
     private int BGMnowplaying; //현재 재생중인 BGM
 
