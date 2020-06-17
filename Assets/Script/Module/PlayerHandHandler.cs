@@ -82,6 +82,7 @@ public class PlayerHandHandler : MonoBehaviour
                 Debug.Log("Do Locate");
                 table.ChangeLocation(beforeClick, curClick);
                 ClearClickObject();
+                EffectManager.instance.Play("button1");
             }
 
             // 갤러리 퇴장

@@ -1,7 +1,7 @@
-pottery3,1
-pottery6,2
-pottery5,4
-pottery1,23
-pottery4,46
-pottery2,49
 pottery7,0
+pottery6,2
+pottery5,3
+pottery3,6
+pottery4,46
+pottery1,48
+pottery2,49
