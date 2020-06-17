@@ -56,7 +56,7 @@ public class SaveDialog : MonoBehaviour
             //from규리 : 도자기 저장 코드 연결 부탁합니다.
 
             //도자기 저장 알림창 켜기
-            
+            showSavedPanel();
 
             //3초후~알림끄고 이동
             Invoke("SaveAndToMolding", 3f);
