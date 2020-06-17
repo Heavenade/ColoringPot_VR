@@ -11,6 +11,14 @@ public class ObjectControl : MonoBehaviour
     public GameObject palette;
     public GameObject bakeDialog;
 
+    private void Awake()
+    {
+        GameObject[] objs = GameObject.FindGameObjectsWithTag("Player");
+        if (objs.Length == 2)
+        {
+            objs[1].SetActive(false);
+        }
+    }
 
     void Start()
     {
