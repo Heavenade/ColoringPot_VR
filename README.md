@@ -1,8 +1,5 @@
 <center>
-  <img src="docs/images/capture1.png" width="20%" />
-  <img src="docs/images/capture2.png" width="20%" />
-  <img src="docs/images/capture3.png" width="20%" />
-  <img src="docs/images/capture4.png" width="20%" />
+  <img src="docs/images/preview.png" />
 </center>
 
 # Coloring Pot VR
